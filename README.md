@@ -13,7 +13,7 @@
 [![Flake8](https://img.shields.io/badge/flake8-passed-brightgreen)](https://flake8.pycqa.org/en/latest/)
 [![Mypy](https://img.shields.io/badge/mypy-passed-brightgreen)](http://mypy-lang.org/)
 
-### Frontend: TypeScript, React, Redux, TaildwindCSS, Vite, Jest, ESLint, Prettier, Stylelint, MSW, Husky, Lint-staged, Commitizen
+### Frontend: TypeScript, React, Redux, TailwindCSS, Vite, Jest, ESLint, Prettier, Stylelint, MSW, Husky, Lint-staged, Commitizen
 
 ![Jest Lines Coverage](frontend/movies_frontend/badges/lines.svg)
 ![Jest Average Coverage](frontend/movies_frontend/badges/average.svg)
