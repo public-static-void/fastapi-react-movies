@@ -10,8 +10,4 @@ COPY . .
 
 EXPOSE 8000
 
-RUN pwd
-
-RUN ls
-
 CMD ["python", "-m", "movies_backend.main" ]
