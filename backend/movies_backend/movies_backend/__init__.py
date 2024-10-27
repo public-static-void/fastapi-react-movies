@@ -6,7 +6,7 @@ Summary       : FastAPI backend template project.
 
 Author        : Vadim Titov
 Created       : Di Okt 15 16:57:03 2024 +0200
-Last modified : Mi Okt 16 16:37:47 2024 +0200
+Last modified : Mi Okt 27 18:24:34 2024 +0200
 """
 
 __version__ = "1.0.0"
@@ -41,7 +41,9 @@ def create_app() -> FastAPI:
     )
     app.add_middleware(
         CORSMiddleware,
-        allow_origin_regex=r"https?://(?:127\.0\.0\.1|localhost):300[0-9]",
+        allow_origin_regex=(
+            r"https?://(?:127\.0\.0\.1|localhost)(?::300[0-9])?"
+        ),
         allow_methods=["*"],
         allow_headers=["*"],
     )
