@@ -1,0 +1,16 @@
+---
+services:
+  frontend:
+    build:
+      context: ./frontend/movies_frontend
+    ports:
+      - 3000:80
+  backend:
+    build:
+      context: ./backend/movies_backend
+    ports:
+      - 8000:8000
+    environment:
+      - MM_DB_PATH=/var/db/movies_backend
+    volumes:
+      - ${MM_DB_PATH:-./backend/db}:/var/db/movies_backend
