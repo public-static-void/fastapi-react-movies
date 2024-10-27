@@ -28,6 +28,10 @@
 
 #### How to run:
 
+##### Set environment variables:
+
+    export VITE_BACKEND=http://localhost:8000
+
 ##### Spin up the containers:
 
     docker-compose up -d --build
