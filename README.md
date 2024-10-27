@@ -36,7 +36,7 @@
 
     docker-compose up -d --build
 
-###### App will run on localhost Port 80 by default
+###### App will run on localhost Port 3000 by default
 
 ##### How to stop:
 
