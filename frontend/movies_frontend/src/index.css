@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-300;
+  }
+}
+
+@layer components {
+  .move-data-input {
+    @apply h-7 border border-solid border-gray-300 focus:border-2 focus:border-gray-500 focus:bg-gray-100 w-full outline-none rounded px-1;
+  }
+  .movie-data-button {
+    @apply inline-block w-1/2 text-white mx-2 my-1 p-1 uppercase font-bold tracking-wider disabled:bg-gray-400 disabled:hover:bg-gray-400;
+  }
+}

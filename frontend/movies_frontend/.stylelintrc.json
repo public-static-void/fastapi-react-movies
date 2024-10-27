@@ -1,0 +1,9 @@
+{
+  "extends": ["stylelint-config-standard"],
+  "customSyntax": "postcss-styled-syntax",
+  "plugins": ["stylelint-order"],
+  "ignoreFiles": [".gitignore", "**/node_modules/**", "dist/**"],
+  "rules": {
+    "order/properties-alphabetical-order": true
+  }
+}
