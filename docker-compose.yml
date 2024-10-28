@@ -3,10 +3,10 @@ services:
   frontend:
     build:
       context: ./frontend/movies_frontend
+      args:
+        VITE_BACKEND: ${VITE_BACKEND}
     ports:
       - 3000:80
-    environment:
-      - VITE_BACKEND=${VITE_BACKEND}
   backend:
     build:
       context: ./backend/movies_backend

@@ -1,5 +1,8 @@
 FROM node:22.9.0-slim AS builder
 
+ARG VITE_BACKEND
+ENV VITE_BACKEND=$VITE_BACKEND
+
 WORKDIR /app
 
 COPY package*.json ./
