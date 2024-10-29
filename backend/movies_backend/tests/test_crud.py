@@ -6,7 +6,7 @@ Summary       : CRUD functionality tests.
 
 Author        : Vadim Titov
 Created       : Mi Okt 16 16:44:51 2024 +0200
-Last modified : Mi Okt 28 18:35:07 2024 +0200
+Last modified : Mi Okt 29 13:11:16 2024 +0200
 """
 
 import sqlite3
@@ -19,21 +19,20 @@ from pytest_mock import MockerFixture
 from sqlalchemy.orm import Session
 
 from movies_backend.crud import (add_actor, add_category, add_movie,
-                                 add_movie_actor, add_movie_category,
                                  add_series, add_studio, delete_actor,
-                                 delete_category, delete_movie, delete_series,
-                                 delete_studio, get_actor, get_actor_by_name,
-                                 get_all_actors, get_all_categories,
-                                 get_all_movies, get_all_series,
-                                 get_all_studios, get_category,
+                                 delete_category, delete_series, delete_studio,
+                                 get_actor, get_actor_by_name, get_all_actors,
+                                 get_all_categories, get_all_movies,
+                                 get_all_series, get_all_studios, get_category,
                                  get_category_by_name, get_movie, get_series,
                                  get_series_by_name, get_studio,
-                                 get_studio_by_name, update_actor,
-                                 update_category, update_movie, update_series,
+                                 get_studio_by_name, parse_file_info,
+                                 update_actor, update_category, update_series,
                                  update_studio)
 from movies_backend.database import get_db_session, init_db
-from movies_backend.exceptions import DuplicateEntryException
-from movies_backend.schemas import MovieUpdateSchema
+from movies_backend.exceptions import (DuplicateEntryException,
+                                       IntegrityConstraintException,
+                                       InvalidIDException)
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -188,6 +187,10 @@ def test_update_actor(db: Session) -> None:
     assert actor is not None
     assert actor == updated_actor
     assert actor.name == actor_name_new
+    with pytest.raises(InvalidIDException):
+        _ = update_actor(db=db, actor_id=-1, actor_name="")
+    with pytest.raises(DuplicateEntryException):
+        _ = update_actor(db=db, actor_id=20, actor_name="Al Pacino")
 
 
 def test_delete_actor(db: Session) -> None:
@@ -202,6 +205,10 @@ def test_delete_actor(db: Session) -> None:
     delete_actor(db=db, actor_id=20)
     actor = get_actor(db=db, actor_id=20)
     assert actor is None
+    with pytest.raises(InvalidIDException):
+        _ = delete_actor(db=db, actor_id=-1)
+    with pytest.raises(IntegrityConstraintException):
+        _ = delete_actor(db=db, actor_id=1)
 
 
 def test_add_category(db: Session) -> None:
@@ -313,6 +320,10 @@ def test_update_category(db: Session) -> None:
     assert category is not None
     assert category == updated_category
     assert category.name == category_name_new
+    with pytest.raises(InvalidIDException):
+        _ = update_category(db=db, category_id=-1, category_name="")
+    with pytest.raises(DuplicateEntryException):
+        _ = update_category(db=db, category_id=5, category_name="Drama")
 
 
 def test_delete_category(db: Session) -> None:
@@ -327,6 +338,10 @@ def test_delete_category(db: Session) -> None:
     delete_category(db=db, category_id=5)
     category = get_category(db=db, category_id=5)
     assert category is None
+    with pytest.raises(InvalidIDException):
+        _ = delete_category(db=db, category_id=-1)
+    with pytest.raises(IntegrityConstraintException):
+        _ = delete_category(db=db, category_id=1)
 
 
 def test_add_series(db: Session) -> None:
@@ -435,6 +450,10 @@ def test_update_series(db: Session) -> None:
     assert series is not None
     assert series == updated_series
     assert series.name == series_name_new
+    with pytest.raises(InvalidIDException):
+        _ = update_series(db=db, series_id=-1, series_name="")
+    with pytest.raises(DuplicateEntryException):
+        _ = update_series(db=db, series_id=3, series_name="Saw")
 
 
 def test_delete_series(db: Session) -> None:
@@ -449,6 +468,10 @@ def test_delete_series(db: Session) -> None:
     delete_series(db=db, series_id=3)
     series = get_series(db=db, series_id=3)
     assert series is None
+    with pytest.raises(InvalidIDException):
+        _ = delete_series(db=db, series_id=-1)
+    with pytest.raises(IntegrityConstraintException):
+        _ = delete_series(db=db, series_id=1)
 
 
 def test_add_studio(db: Session) -> None:
@@ -556,6 +579,10 @@ def test_update_studio(db: Session) -> None:
     assert studio is not None
     assert studio == updated_studio
     assert studio.name == studio_name_new
+    with pytest.raises(InvalidIDException):
+        _ = update_studio(db=db, studio_id=-1, studio_name="")
+    with pytest.raises(DuplicateEntryException):
+        _ = update_studio(db=db, studio_id=7, studio_name="Warner Bros.")
 
 
 def test_delete_studio(db: Session) -> None:
@@ -570,6 +597,10 @@ def test_delete_studio(db: Session) -> None:
     delete_studio(db=db, studio_id=7)
     studio = get_studio(db=db, studio_id=7)
     assert studio is None
+    with pytest.raises(InvalidIDException):
+        _ = delete_studio(db=db, studio_id=-1)
+    with pytest.raises(IntegrityConstraintException):
+        _ = delete_studio(db=db, studio_id=1)
 
 
 def test_add_movie(db: Session) -> None:
@@ -581,15 +612,24 @@ def test_add_movie(db: Session) -> None:
     db : Session
         Database session
     """
+    actor1 = add_actor(db=db, name="Elijah Wood")
+    actor2 = add_actor(db=db, name="Ian McKellen")
+    actor3 = add_actor(db=db, name="Liv Tyler")
+    actor4 = add_actor(db=db, name="Viggo Mortensen")
+    category1 = add_category(db=db, name="Fantasy")
     movie = add_movie(
         db=db,
         filename="lotr.mp4",
         name="The Lord of the Rings: The Fellowship of the Ring",
+        actors=[actor1, actor2, actor3, actor4],
+        categories=[category1],
     )
     assert movie is not None
     assert movie.id == 13
     assert movie.name == "The Lord of the Rings: The Fellowship of the Ring"
     assert movie.filename == "lotr.mp4"
+    assert movie.actors == [actor1, actor2, actor3, actor4]
+    assert movie.categories == [category1]
     assert movie.processed is False
 
 
@@ -651,3 +691,30 @@ def test_get_all_movies(db: Session) -> None:
     movies = get_all_movies(db=db)
     assert movies is not None
     assert len(movies) == 13
+
+
+def test_parse_file_info(db: Session) -> None:
+    """
+    Test parse_file_info
+
+    Parameters
+    ----------
+    db : Session
+        Database session
+    """
+    filename = (
+        "[Paramount Pictures] {The Godfather 2} The Godfather Part II (Al"
+        " Pacino, Diane Keaton, Robert De Niro, Robert Duvall)"
+    )
+    name, studio_id, series_id, series_number, actors = parse_file_info(
+        db=db, filename=filename
+    )
+    assert name == "The Godfather Part II"
+    studio = get_studio_by_name(db=db, studio_name="Paramount Pictures")
+    assert studio is not None
+    assert studio.id == studio_id
+    series = get_series_by_name(db=db, series_name="The Godfather")
+    assert series is not None
+    assert series.id == series_id
+    assert series_number == 2
+    assert len(actors) == 4
