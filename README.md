@@ -15,11 +15,11 @@
 
 ### Frontend: TypeScript, React, Redux, TailwindCSS, Vite, Jest, ESLint, Prettier, Stylelint, MSW, Husky, Lint-staged, Commitizen
 
-![Jest Lines Coverage](frontend/movies_frontend/badges/lines.svg)
 ![Jest Average Coverage](frontend/movies_frontend/badges/average.svg)
+![Jest Lines Coverage](frontend/movies_frontend/badges/lines.svg)
+![Jest Statements Coverage](frontend/movies_frontend/badges/statements.svg)
 ![Jest Functions Coverage](frontend/movies_frontend/badges/functions.svg)
 ![Jest Branches Coverage](frontend/movies_frontend/badges/branches.svg)
-![Jest Statements Coverage](frontend/movies_frontend/badges/statements.svg)
 [![ESLint](https://img.shields.io/badge/ESLint-4B32C3?logo=eslint&logoColor=white)](https://eslint.org/)
 [![Stylelint](https://img.shields.io/badge/stylelint-4B32C3?logo=stylelint&logoColor=white)](https://stylelint.io/)
 [![Prettier](https://img.shields.io/badge/Prettier-ff69b4?logo=prettier&logoColor=white)](https://prettier.io/)
