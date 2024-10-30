@@ -68,7 +68,7 @@ const ActorSelector = () => {
                 className="border border-solid border-green-500 w-full"
                 id="actorsAvailable"
                 size={10}
-                defaultValue={availableId}
+                defaultValue={availableId ?? undefined}
                 onChange={(e) => dispatch(setAvailableId(e.target.value))}
                 onDoubleClick={() => void onUpdateActor(true)}
                 onKeyDown={(e) => {
@@ -95,7 +95,7 @@ const ActorSelector = () => {
                 className="border border-solid border-green-500 w-full"
                 id="actorsSelected"
                 size={10}
-                defaultValue={selectedId}
+                defaultValue={selectedId ?? undefined}
                 onChange={(e) => dispatch(setSelectedId(e.target.value))}
                 onDoubleClick={() => {
                   if (selectedId) {

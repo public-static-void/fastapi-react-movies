@@ -66,7 +66,7 @@ export const tgf2Movie: MovieType = {
   id: movies[5]?.id ?? 6,
   filename:
     movies[5]?.filename ??
-    '[Paramount] {The Godfather} The Godfather Part II (Al Pacino, Robert De Niro).mp4',
+    '[Paramount] {The Godfather 2} The Godfather Part II (Al Pacino, Robert De Niro).mp4',
   name: 'The Godfather Part II',
   actors: actors.filter((actor) => tgf2Actors.includes(actor.name)),
   categories: categories.filter((category) => category.name === 'Crime'),

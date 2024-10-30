@@ -2,9 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SelectBoxSliceType } from '../types/state';
 
 const initialState: SelectBoxSliceType = {
-  availableId: undefined,
-  selectedId: undefined,
-  movieId: undefined,
+  availableId: null,
+  selectedId: null,
+  movieId: null,
 };
 
 const slice = createSlice({

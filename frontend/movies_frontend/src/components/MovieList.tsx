@@ -48,7 +48,7 @@ const MovieList = () => {
         <select
           className="h-64 w-full"
           size={10}
-          defaultValue={movieId && movieId}
+          defaultValue={movieId ?? ''}
           onChange={(e) => {
             dispatch(setMovieId(e.target.value));
             setStatus('');

@@ -21,7 +21,7 @@ if (typeof import.meta.env.VITE_BACKEND !== 'string') {
   baseUrl = import.meta.env.VITE_BACKEND;
 }
 
-export const api = createApi({
+export const MovieManagerApi = createApi({
   reducerPath: 'movieManagerApi',
   tagTypes: ['movies', 'movie', 'actors', 'categories', 'series', 'studios'],
   baseQuery: fetchBaseQuery({
@@ -210,5 +210,4 @@ export const {
   useStudioDeleteMutation,
   useStudioUpdateMutation,
   useStudiosQuery,
-} = api;
-export default api;
+} = MovieManagerApi;

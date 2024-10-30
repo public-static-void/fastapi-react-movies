@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import SelectBoxSlice from './SelectBoxSlice';
-import MovieManagerApi from './MovieManagerApi';
+import { MovieManagerApi } from './MovieManagerApi';
 
 export const createNewStore = () =>
   configureStore({

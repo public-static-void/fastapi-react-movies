@@ -20,7 +20,7 @@ export interface MoviePropertyType {
 }
 
 export interface SelectBoxSliceType {
-  availableId: string | undefined;
-  selectedId: string | undefined;
-  movieId: string | undefined;
+  availableId: string | null;
+  selectedId: string | null;
+  movieId: string | null;
 }

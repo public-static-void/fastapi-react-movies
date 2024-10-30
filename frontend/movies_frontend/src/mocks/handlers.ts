@@ -10,6 +10,7 @@ import {
 import {
   ActorType,
   CategoryType,
+  HTTPExceptionType,
   MovieFileType,
   MovieType,
   SeriesType,
