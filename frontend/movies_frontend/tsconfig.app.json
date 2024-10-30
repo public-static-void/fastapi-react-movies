@@ -20,16 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
-  "exclude": [
-    "./src/**/__tests__/**",
-    "./src/**/__test__/**",
-    "./src/**/__mocks__/**",
-    "./src/**/mocks/**",
-    "./src/**/test-utils/**",
-    "./src/**/test-utils.ts",
-    "./src/**/test-utils.tsx",
-    "./src/**/*.test.ts",
-    "./src/**/*.test.tsx"
-  ]
+  "include": ["src"]
 }

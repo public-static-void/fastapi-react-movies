@@ -11,7 +11,7 @@ dist
 # Coverage reports
 coverage
 
-# Consolidated test files and directories
+# Test files and directories
 **/*.test.ts
 **/*.test.tsx
 **/__tests__/**
@@ -38,7 +38,10 @@ badges/
 .DS_Store
 *.log
 
-# Ignore config files that are not needed in production (optional)
+# Ignore config files that are not needed in production
 .prettierrc
 .stylelintrc.json
 .markuplintrc
+jest.config.ts
+jest.setup.ts
+

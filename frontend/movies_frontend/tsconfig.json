@@ -39,5 +39,17 @@
     /* Other */
     "forceConsistentCasingInFileNames": true,
     "types": ["jest", "node", "vite/client"]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "**/__tests__/**",
+    "**/__test__/**",
+    "**/__mocks__/**",
+    "**/mocks/**",
+    "**/test-utils/**",
+    "**/test-utils.ts",
+    "**/test-utils.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }
