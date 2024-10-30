@@ -14,12 +14,7 @@ import {
   sawMovie,
   tgf2Movie,
 } from '../../mocks/defaults';
-import {
-  render,
-  screen,
-  waitFor,
-  waitForElementToBeRemoved,
-} from '../../test-utils';
+import { render, screen, waitFor } from '../../test-utils';
 import { MovieUpdateQueryType } from '../../types/state';
 import { backend } from '../../mocks/handlers';
 import { http, HttpResponse, PathParams } from 'msw';
@@ -30,10 +25,8 @@ describe('Test MainPage', () => {
   const movieName = 'Saw';
   beforeEach(async () => {
     render(<MainPage />);
-    await waitForElementToBeRemoved(() =>
-      screen.getAllByRole('heading', {
-        name: 'Loading...',
-      })
+    await waitFor(() =>
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument()
     );
     const moviesList = await screen.findByTestId('movies-listbox');
     await user.selectOptions(moviesList, '2');
@@ -280,128 +273,132 @@ describe('Test MainPage', () => {
       await waitFor(() => expect(checkbox.checked).toBe(true));
     });
   });
+});
 
-  describe('Test MovieDataForm', () => {
-    let nameField: HTMLInputElement;
-    let studioSelector: HTMLSelectElement;
-    let seriesSelector: HTMLSelectElement;
-    let seriesNumberField: HTMLInputElement;
-    let updateButton: HTMLButtonElement;
-    let removeButton: HTMLButtonElement;
-    beforeEach(() => {
-      nameField = screen.getByRole('textbox', { name: 'Name' });
-      studioSelector = screen.getByRole('combobox', { name: 'Studio' });
-      seriesSelector = screen.getByRole('combobox', { name: 'Series' });
-      seriesNumberField = screen.getByRole('textbox', { name: 'Series #' });
-      updateButton = screen.getByRole('button', { name: /update/i });
-      removeButton = screen.getByRole('button', { name: /remove/i });
-    });
+describe('Test MovieDataForm', () => {
+  let nameField: HTMLInputElement;
+  let studioSelector: HTMLSelectElement;
+  let seriesSelector: HTMLSelectElement;
+  let seriesNumberField: HTMLInputElement;
+  let updateButton: HTMLButtonElement;
+  let removeButton: HTMLButtonElement;
 
-    it('Successfully changes Saw -> The Godfather Part II', async () => {
-      server.use(
-        http.put<PathParams, MovieUpdateQueryType, MovieType>(
-          backend('/movies/:id'),
-          () => {
-            return HttpResponse.json(tgf2Movie);
-          }
-        )
-      );
-      server.use(
-        http.get<PathParams, MovieType>(backend('/movies/:id'), () => {
+  beforeEach(async () => {
+    render(<MainPage />);
+    await waitFor(() =>
+      expect(screen.queryByText('Loading...')).not.toBeInTheDocument()
+    );
+    await screen.findByTestId('movies-listbox');
+    nameField = screen.getByRole('textbox', { name: 'Name' });
+    studioSelector = screen.getByRole('combobox', { name: 'Studio' });
+    seriesSelector = screen.getByRole('combobox', { name: 'Series' });
+    seriesNumberField = screen.getByRole('textbox', { name: 'Series #' });
+    updateButton = screen.getByRole('button', { name: /update/i });
+    removeButton = screen.getByRole('button', { name: /remove/i });
+  });
+
+  it('Successfully changes Saw -> The Godfather Part II', async () => {
+    server.use(
+      http.put<PathParams, MovieUpdateQueryType, MovieType>(
+        backend('/movies/:id'),
+        () => {
           return HttpResponse.json(tgf2Movie);
-        })
-      );
-      server.use(
-        http.get<PathParams, MovieFileType[]>(backend('/movies'), () => {
-          return HttpResponse.json([{ id: 1, filename: tgf2Movie.filename }]);
-        })
-      );
-      await waitFor(async () => {
-        await user.clear(nameField);
-        expect(nameField).toHaveValue('');
-      });
-      await user.type(nameField, tgf2Movie.name!);
-      expect(nameField.value).toBe(tgf2Movie.name);
-      const studioId = tgf2Movie.studio!.id.toString();
-      await user.selectOptions(studioSelector, studioId);
-      expect(studioSelector.value).toBe(studioId);
-      const seriesId = tgf2Movie.series?.id.toString() ?? '';
-      await user.selectOptions(seriesSelector, seriesId);
-      expect(seriesSelector.value).toBe(seriesId);
-      const seriesNumber = tgf2Movie.series_number!.toString();
-      await waitFor(async () => {
-        await user.clear(seriesNumberField);
-        expect(seriesNumberField).toHaveValue('');
-      });
-      await user.type(seriesNumberField, seriesNumber);
-      expect(seriesNumberField.value).toBe(seriesNumber);
-      await user.click(updateButton);
-      const statusText = await screen.findByText(
-        'Successfully updated movie The Godfather Part II'
-      );
-      expect(statusText).toBeInTheDocument();
-      await screen.findByRole('option', { name: tgf2Movie.filename });
+        }
+      )
+    );
+    server.use(
+      http.get<PathParams, MovieType>(backend('/movies/:id'), () => {
+        return HttpResponse.json(tgf2Movie);
+      })
+    );
+    server.use(
+      http.get<PathParams, MovieFileType[]>(backend('/movies'), () => {
+        return HttpResponse.json([{ id: 1, filename: tgf2Movie.filename }]);
+      })
+    );
+    await waitFor(async () => {
+      await user.clear(nameField);
+      expect(nameField).toHaveValue('');
     });
+    await user.type(nameField, tgf2Movie.name!);
+    expect(nameField.value).toBe(tgf2Movie.name);
+    const studioId = tgf2Movie.studio!.id.toString();
+    await user.selectOptions(studioSelector, studioId);
+    expect(studioSelector.value).toBe(studioId);
+    const seriesId = tgf2Movie.series?.id.toString() ?? '';
+    await user.selectOptions(seriesSelector, seriesId);
+    expect(seriesSelector.value).toBe(seriesId);
+    const seriesNumber = tgf2Movie.series_number!.toString();
+    await waitFor(async () => {
+      await user.clear(seriesNumberField);
+      expect(seriesNumberField).toHaveValue('');
+    });
+    await user.type(seriesNumberField, seriesNumber);
+    expect(seriesNumberField.value).toBe(seriesNumber);
+    await user.click(updateButton);
+    const statusText = await screen.findByText(
+      'Successfully updated movie The Godfather Part II'
+    );
+    expect(statusText).toBeInTheDocument();
+    await screen.findByRole('option', { name: tgf2Movie.filename });
+  });
 
-    it('Successfully removes Saw', async () => {
-      server.use(
-        http.get<PathParams, MovieFileType[]>(backend('/movies'), () => {
-          return HttpResponse.json([]);
-        })
-      );
-      server.use(
-        http.delete<PathParams, MessageType>(backend('/movies/:id'), () => {
-          return HttpResponse.json({
-            message: `Successfully removed movie ${sawMovie.name}`,
-          });
-        })
-      );
-      const movieListOption = await screen.findByRole('option', {
-        name: sawMovie.filename,
-      });
-      const confirmSpy = jest.spyOn(window, 'confirm');
-      confirmSpy.mockImplementation(jest.fn(() => true));
-      await user.click(removeButton);
-      expect(window.confirm).toHaveBeenCalled();
-      confirmSpy.mockRestore();
-      await waitFor(() => {
-        expect(movieListOption).not.toBeInTheDocument();
-      });
-      await waitFor(() => {
-        expect(nameField.value).toBe('');
-        expect(nameField).toBeDisabled();
-      });
-      await waitFor(() => {
-        expect(studioSelector.value).toBe('');
-        expect(studioSelector).toBeDisabled();
-      });
-      await waitFor(() => {
-        expect(seriesSelector.value).toBe('');
-        expect(seriesSelector).toBeDisabled();
-      });
-      await waitFor(() => {
-        expect(seriesNumberField.value).toBe('');
-        expect(seriesNumberField).toBeDisabled();
-      });
-      await waitFor(() => {
-        expect(removeButton).toBeDisabled();
-        expect(updateButton).toBeDisabled();
-      });
-      const checkboxes: HTMLInputElement[] =
-        await screen.findAllByRole('checkbox');
-      for (const checkbox of checkboxes) {
-        await waitFor(() => {
-          expect(checkbox.checked).toBe(false);
-          expect(checkbox).toBeDisabled();
+  it('Successfully removes Godfather Part II', async () => {
+    server.use(
+      http.get<PathParams, MovieFileType[]>(backend('/movies'), () => {
+        return HttpResponse.json([]);
+      })
+    );
+    server.use(
+      http.delete<PathParams, MessageType>(backend('/movies/:id'), () => {
+        return HttpResponse.json({
+          message: `Successfully removed movie ${tgf2Movie.name}`,
         });
-      }
-      await waitFor(() => {
-        expect(
-          screen.getByRole('listbox', { name: 'Available' })
-        ).toBeDisabled();
-      });
-      await screen.findByRole('heading', { name: 'None' });
-      expect(screen.queryByRole('listbox', { name: 'Selected' })).toBeNull();
+      })
+    );
+    const movieListOption = await screen.findByRole('option', {
+      name: tgf2Movie.filename,
     });
+    const confirmSpy = jest.spyOn(window, 'confirm');
+    confirmSpy.mockImplementation(jest.fn(() => true));
+    await user.click(removeButton);
+    expect(window.confirm).toHaveBeenCalled();
+    confirmSpy.mockRestore();
+    await waitFor(() => {
+      expect(movieListOption).not.toBeInTheDocument();
+    });
+    await waitFor(() => {
+      expect(nameField.value).toBe('');
+      expect(nameField).toBeDisabled();
+    });
+    await waitFor(() => {
+      expect(studioSelector.value).toBe('');
+      expect(studioSelector).toBeDisabled();
+    });
+    await waitFor(() => {
+      expect(seriesSelector.value).toBe('');
+      expect(seriesSelector).toBeDisabled();
+    });
+    await waitFor(() => {
+      expect(seriesNumberField.value).toBe('');
+      expect(seriesNumberField).toBeDisabled();
+    });
+    await waitFor(() => {
+      expect(removeButton).toBeDisabled();
+      expect(updateButton).toBeDisabled();
+    });
+    const checkboxes: HTMLInputElement[] =
+      await screen.findAllByRole('checkbox');
+    for (const checkbox of checkboxes) {
+      await waitFor(() => {
+        expect(checkbox.checked).toBe(false);
+        expect(checkbox).toBeDisabled();
+      });
+    }
+    await waitFor(() => {
+      expect(screen.getByRole('listbox', { name: 'Available' })).toBeDisabled();
+    });
+    await screen.findByRole('heading', { name: 'None' });
+    expect(screen.queryByRole('listbox', { name: 'Selected' })).toBeNull();
   });
 });
