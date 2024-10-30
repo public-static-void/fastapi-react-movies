@@ -14,7 +14,7 @@
     </clipPath>
     <g clip-path="url(#r)">
       <rect width="65" height="20" fill="#555"/>
-      <rect x="65" width="45" height="20" fill="#dfb317"/>
+      <rect x="65" width="45" height="20" fill="#007ec6"/>
       <rect width="110" height="20" fill="url(#s)"/>
     </g>
     <g fill="#fff" font-family="Tahoma,Arial" font-size="110">
@@ -25,7 +25,7 @@
         Average
       </text>
       <text x="700" y="140" transform="scale(.1)">
-        54.25%
+        87.54%
       </text>
     </g>
   </svg>

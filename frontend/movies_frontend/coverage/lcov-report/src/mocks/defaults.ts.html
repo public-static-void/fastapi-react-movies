@@ -25,28 +25,28 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/8</span>
+                <span class='fraction'>10/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
@@ -124,7 +124,22 @@
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -185,6 +200,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">25x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">25x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
   ActorType,
   CategoryType,
@@ -237,14 +267,29 @@ export const studios: StudioType[] = [
 export const sawActors = ['Danny Glover'];
 &nbsp;
 export const sawMovie: MovieType = {
-  id: movies[0]?.id ?? <span class="branch-1 cbranch-no" title="branch not covered" >2,</span>
-  filename: movies[0]?.filename ?? <span class="branch-1 cbranch-no" title="branch not covered" >'[Twisted] {Saw 1} Saw (Danny Glover).mp4',</span>
+  id: movies[1]?.id ?? <span class="branch-1 cbranch-no" title="branch not covered" >2,</span>
+  filename: movies[1]?.filename ?? <span class="branch-1 cbranch-no" title="branch not covered" >'[Twisted] {Saw 1} Saw (Danny Glover).mp4',</span>
   name: 'Saw',
   actors: actors.filter((actor) =&gt; sawActors.includes(actor.name)),
   categories: categories.filter((category) =&gt; category.name === 'Horror'),
   series: series.find((series) =&gt; series?.name === 'Saw') ?? <span class="branch-1 cbranch-no" title="branch not covered" >null,</span>
   series_number: 1,
   studio: studios.find((studio) =&gt; studio?.name === 'Twisted') ?? <span class="branch-1 cbranch-no" title="branch not covered" >null,</span>
+};
+&nbsp;
+export const tgf2Actors = ['Al Pacino', 'Robert De Niro'];
+&nbsp;
+export const tgf2Movie: MovieType = {
+  id: movies[5]?.id ?? 6,
+  filename:
+    movies[5]?.filename ??
+    '[Paramount] {The Godfather 2} The Godfather Part II (Al Pacino, Robert De Niro).mp4',
+  name: 'The Godfather Part II',
+  actors: actors.filter((actor) =&gt; tgf2Actors.includes(actor.name)),
+  categories: categories.filter((category) =&gt; category.name === 'Crime'),
+  series: series.find((series) =&gt; series?.name === 'The Godfather') ?? <span class="branch-1 cbranch-no" title="branch not covered" >null,</span>
+  series_number: 2,
+  studio: studios.find((studio) =&gt; studio?.name === 'Paramount') ?? <span class="branch-1 cbranch-no" title="branch not covered" >null,</span>
 };
 &nbsp;</pre></td></tr></table></pre>
 
@@ -253,7 +298,7 @@ export const sawMovie: MovieType = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-11T17:18:54.555Z
+                at 2024-10-30T15:25:43.243Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

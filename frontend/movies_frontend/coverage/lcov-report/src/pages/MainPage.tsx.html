@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">64% </span>
+                <span class="strong">84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/25</span>
+                <span class='fraction'>21/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">41.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>5/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">62.5% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/24</span>
+                <span class='fraction'>20/24</span>
             </div>
         
             
@@ -166,11 +166,31 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">81x</span>
-<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">44x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -180,30 +200,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">47x</span>
+<span class="cline-any cline-yes">131x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -237,7 +237,7 @@ import { HTTPExceptionType } from '../types/api';
 import { MainPageFormValuesType } from '../types/form';
 import { useAppSelector } from '../state/hooks';
 import { useMovieUpdateMutation } from '../state/MovieManagerApi';
-import { MovieUpdateType } from '../types/state';
+import { MovieUpdateQueryType } from '../types/state';
 &nbsp;
 const initialValues: MainPageFormValuesType = {
   movieName: '',
@@ -251,25 +251,25 @@ const MainPage = () =&gt; {
   const movieId = useAppSelector((state) =&gt; state.selectBox.movieId);
   const [trigger] = useMovieUpdateMutation();
 &nbsp;
-  const onSubmit = <span class="fstat-no" title="function not covered" >async </span>(
+  const onSubmit = async (
     values: MainPageFormValuesType,
     helpers: FormikHelpers&lt;MainPageFormValuesType&gt;
   ) =&gt; {
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (movieId) {</span>
-      const params: MovieUpdateType = <span class="cstat-no" title="statement not covered" >{</span>
+    if (movieId) {
+      const params: MovieUpdateQueryType = {
         id: movieId,
-        name: values.movieName ? values.movieName : null,
-        series_id: values.movieSeriesId ? +values.movieSeriesId : null,
+        name: values.movieName ? values.movieName : <span class="branch-1 cbranch-no" title="branch not covered" >null,</span>
+        series_id: values.movieSeriesId ? +values.movieSeriesId : <span class="branch-1 cbranch-no" title="branch not covered" >null,</span>
         series_number: values.movieSeriesNumber
           ? +values.movieSeriesNumber
-          : null,
-        studio_id: values.movieStudioId ? +values.movieStudioId : null,
+          : <span class="branch-1 cbranch-no" title="branch not covered" >null,</span>
+        studio_id: values.movieStudioId ? +values.movieStudioId : <span class="branch-1 cbranch-no" title="branch not covered" >null,</span>
       };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      try {</span>
-<span class="cstat-no" title="statement not covered" >        await trigger(params).unwrap();</span>
+      try {
+        await trigger(params).unwrap();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        helpers.setStatus(`Successfully updated movie ${values.movieName}`);</span>
+        helpers.setStatus(`Successfully updated movie ${values.movieName}`);
       } catch (error) {
         const { status, data } = <span class="cstat-no" title="statement not covered" >error as FetchBaseQueryError;</span>
 <span class="cstat-no" title="statement not covered" >        <span class="missing-if-branch" title="if path not taken" >I</span>if (status !== 422) {</span>
@@ -316,7 +316,7 @@ export default MainPage;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-11T17:18:54.555Z
+                at 2024-10-30T15:25:43.243Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
