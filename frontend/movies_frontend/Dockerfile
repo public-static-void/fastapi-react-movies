@@ -5,13 +5,13 @@ ENV VITE_BACKEND=$VITE_BACKEND
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json yarn.lock ./
 
-RUN npm install --omit=dev
+RUN yarn install --production
 
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
 FROM nginx:stable-alpine
 

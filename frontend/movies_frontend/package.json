@@ -11,8 +11,8 @@
     "lint": "eslint . --fix && stylelint --fix '**/*.(css|scss|tsx)'",
     "format": "prettier --write .",
     "test": "NODE_NO_WARNINGS=1 jest --passWithNoTests",
-    "test:coverage": "npm test -- --coverage",
-    "test:badges": "npm run test:coverage && coverage-badges --save=./badges"
+    "test:coverage": "yarn test --coverage",
+    "test:badges": "yarn test:coverage && coverage-badges --save=./badges"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
@@ -32,6 +32,7 @@
   "devDependencies": {
     "@adso-ts/badges": "^1.1.4",
     "@eslint/js": "^9.9.0",
+    "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
@@ -47,7 +48,8 @@
     "globals": "^15.11.0",
     "husky": "^9.1.6",
     "jest": "^29.7.0",
-    "jest-fixed-jsdom": "^0.0.2",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-fixed-jsdom": "^0.0.6",
     "license-generator": "^0.0.13",
     "lint-staged": "^15.2.10",
     "msw": "^2.5.2",
@@ -59,7 +61,8 @@
     "ts-jest": "^29.2.5",
     "ts-jest-mock-import-meta": "^1.2.0",
     "ts-node": "^10.9.2",
-    "typescript-eslint": "^8.11.0"
+    "typescript-eslint": "^8.11.0",
+    "vite": "^5.4.10"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -76,5 +79,6 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
