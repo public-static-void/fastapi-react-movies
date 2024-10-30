@@ -1,1 +1,40 @@
-**/__pycache__
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment directories
+.venv/
+venv/
+env/
+.venv/
+
+# Cache directories
+.mypy_cache/
+.pytest_cache/
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# Test files and directories
+tests/__pycache__/
+tests/*.log
+
+# Ignore environment variables
+.env
+.envrc
+
+# Ignore badge files (if you want to exclude the entire badges folder)
+badges/
+
+# Miscellaneous files to ignore
+.DS_Store
+*.log
+
+# Ignore config files that are not needed in production (optional)
+.pre-commit-config.yaml
+.pylintrc
+.coveragerc
+.flake8
+pytest.ini

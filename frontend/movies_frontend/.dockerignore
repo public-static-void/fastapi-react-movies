@@ -1,2 +1,44 @@
+# Node modules
 node_modules
+npm-debug.log
+yarn-error.log
+
+# Build output
 build
+dist
+.vite
+
+# Coverage reports
+coverage
+
+# Consolidated test files and directories
+**/*.test.ts
+**/*.test.tsx
+**/__tests__/**
+**/__test__/**
+**/__mocks__/**
+**/mocks/**
+**/test-utils/**
+**/test-utils.ts
+**/test-utils.tsx
+
+# Ignore environment variables
+.env
+
+# Ignore badges folder entirely
+badges/
+
+# IDE and editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Miscellaneous files to ignore
+.DS_Store
+*.log
+
+# Ignore config files that are not needed in production (optional)
+.prettierrc
+.stylelintrc.json
+.markuplintrc
