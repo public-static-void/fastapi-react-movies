@@ -18,8 +18,7 @@ env/
 htmlcov/
 
 # Test files and directories
-tests/__pycache__/
-tests/*.log
+tests/
 
 # Ignore environment variables
 .env
