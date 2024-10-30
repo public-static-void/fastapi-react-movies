@@ -1,4 +1,5 @@
 import { BroadcastChannel } from 'worker_threads';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
 (global as any).BroadcastChannel = BroadcastChannel;
 
 import { TransformStream } from 'node:stream/web';
