@@ -6,7 +6,7 @@ Summary       : Utility functions tests.
 
 Author        : Vadim Titov
 Created       : Mi Okt 29 13:28:00 2024 +0200
-Last modified : Mi Okt 29 14:40:22 2024 +0200
+Last modified : Do Okt 31 14:15:18 2024 +0100
 """
 
 import pytest
@@ -94,7 +94,7 @@ def test_list_files(mocker: MockerFixture) -> None:
         list_files("/some/path")
 
 
-def test_get_movie_path(mocker: MockerFixture) -> None:
+def test_get_movie_path() -> None:
     """
     Test get_movie_path
 
