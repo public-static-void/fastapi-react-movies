@@ -1,0 +1,40 @@
+name: Lint Python FastAPI Backend
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend/movies_backend
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pylint mypy
+          if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+      - name: Run Flake8
+        run: |
+          flake8 --max-line-length=79 --ignore=E203,E266,W503,W504 --exclude=.git,__pycache__,.venv,old,build,dist .
+      - name: Run Pylint
+        run: |
+          pylint --max-line-length=79 --disable=W0603,C0302,R0917 **/*.py
+      - name: Run Mypy
+        run: |
+          mypy .

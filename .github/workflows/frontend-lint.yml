@@ -1,0 +1,42 @@
+name: Lint React Typescript Frontend
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend/movies_frontend
+    strategy:
+      matrix:
+        node-version: ["22"]
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js ${{ matrix.mode-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Check if Yarn is installed
+        id: check_yarn
+        run: |
+          if ! command -v yarn &> /dev/null; then
+            echo "Yarn not found, installing..."
+            npm install -g yarn
+          else
+            echo "Yarn is already installed."
+          fi
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Run ESLint and Stylelint
+        run: yarn lint
+      - name: Run Prettier
+        run: yarn format
