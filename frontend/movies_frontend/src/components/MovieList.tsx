@@ -46,7 +46,7 @@ const MovieList = () => {
         </div>
       ) : (
         <select
-          className="h-64 w-full"
+          className="h-64 w-full bg-gray-100 dark:bg-gray-900"
           size={10}
           defaultValue={movieId ?? ''}
           onChange={(e) => {

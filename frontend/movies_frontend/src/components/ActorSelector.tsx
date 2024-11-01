@@ -122,7 +122,9 @@ const ActorSelector = () => {
               </select>
             ) : (
               <div className="border border-solid border-gray-400 dark:border-gray-600">
-                <h3 className="text-center text-lg font-bold">None</h3>
+                <h3 className="text-center text-lg font-bold text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-900">
+                  None
+                </h3>
               </div>
             )}
           </ActorSelectorList>
