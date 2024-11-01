@@ -33,8 +33,10 @@
     rounded border active:outline
     bg-gray-200 border-gray-300
     focus:bg-gray-100 focus:border-gray-500
+    disabled:bg-gray-400
     dark:bg-gray-800 dark:border-gray-700
-    dark:focus:bg-gray-900 dark:focus:border-gray-50;
+    dark:focus:bg-gray-900 dark:focus:border-gray-50
+    dark:disabled:bg-gray-400;
   }
   .movie-data-button {
     @apply inline-block w-1/2 mx-2 my-1 p-1
