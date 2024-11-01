@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import SelectBoxSlice from './SelectBoxSlice';
+import ThemeSlice from './ThemeSlice';
 import { MovieManagerApi } from './MovieManagerApi';
 
 export const createNewStore = () =>
@@ -7,6 +8,7 @@ export const createNewStore = () =>
     reducer: {
       [MovieManagerApi.reducerPath]: MovieManagerApi.reducer,
       selectBox: SelectBoxSlice,
+      theme: ThemeSlice,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(MovieManagerApi.middleware),

@@ -53,7 +53,7 @@ const MovieDataForm = () => {
             <div>
               <MovieDataFormRow name="movieName" title="Name">
                 <Field
-                  className="move-data-input"
+                  className="movie-data-input"
                   type="text"
                   name="movieName"
                   id="movieName"
@@ -65,7 +65,7 @@ const MovieDataForm = () => {
                   <Loading />
                 ) : (
                   <select
-                    className="w-full py-1 px-1 rounded"
+                    className="movie-data-select"
                     id="movieStudioId"
                     {...formik.getFieldProps('movieStudioId')}
                   >
@@ -84,7 +84,7 @@ const MovieDataForm = () => {
                   <Loading />
                 ) : (
                   <select
-                    className="w-full py-1 px-1 rounded"
+                    className="movie-data-select"
                     id="movieSeriesId"
                     {...formik.getFieldProps('movieSeriesId')}
                   >
@@ -100,7 +100,7 @@ const MovieDataForm = () => {
 
               <MovieDataFormRow name="movieSeriesNumber" title="Series #">
                 <Field
-                  className="move-data-input"
+                  className="movie-data-input"
                   type="text"
                   name="movieSeriesNumber"
                   id="movieSeriesNumber"
@@ -108,13 +108,13 @@ const MovieDataForm = () => {
               </MovieDataFormRow>
               <div className="flex my-4">
                 <button
-                  className="movie-data-button enabled:bg-green-700 enabled:hover:bg-green-600 rounded"
+                  className="movie-data-button enabled:bg-green-700 enabled:hover:bg-green-600"
                   type="submit"
                 >
                   Update
                 </button>
                 <button
-                  className="movie-data-button enabled:bg-red-700 enabled:hover:bg-red-600 rounded"
+                  className="movie-data-button enabled:bg-red-700 enabled:hover:bg-red-600"
                   type="button"
                   onClick={() => {
                     void onRemoveMovie();

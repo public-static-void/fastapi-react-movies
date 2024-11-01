@@ -7,7 +7,7 @@ const MovieDataFormRow: React.FC<NameTitleChildrenProps> = ({
   title,
 }) => (
   <div className="flex my-2">
-    <div className="w-1/4">
+    <div className="w-1/4 text-gray-900 dark:text-gray-100">
       <label htmlFor={name}>{title}</label>
     </div>
     <div className="w-3/4">{children}</div>

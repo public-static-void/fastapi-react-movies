@@ -205,7 +205,7 @@ const MoviePropertyForm = () => {
   };
 
   return (
-    <div className="border border-solid border-black mx-auto p-4 w-max">
+    <div className="mx-auto p-4 w-max border border-solid rounded-xl border-gray-400 dark:border-gray-600">
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
@@ -285,22 +285,21 @@ const MoviePropertyForm = () => {
               </div>
             </div>
             {formik.values.action !== 'remove' ? (
-              <div className="my-2">
+              <div className="h-10 pt-3">
                 <Field
-                  className="border border-solid border-gray-300 focus:border-2 focus:border-gray-100 outline-none focus:bg-gray-100 rounded p-1 mt-1 h-7 w-full"
+                  className="movie-data-input"
                   type="text"
                   name="name"
                   required
                 />
               </div>
             ) : (
-              <div className="mt-2 p-4"></div>
+              <div className="h-10 pt-3"></div>
             )}
-
             {formik.values.action !== 'add' ? (
-              <div className="my-3">
+              <div className="h-10 pt-3">
                 <select
-                  className="w-full p-1 rounded"
+                  className="movie-data-select"
                   name="nameSelection"
                   onChange={formik.handleChange}
                 >
@@ -332,15 +331,39 @@ const MoviePropertyForm = () => {
                 </select>
               </div>
             ) : (
-              <div className="mt-2 p-4"></div>
+              <div className="h-10 pt-3"></div>
             )}
-            <div className="grid mt-3">
-              <button
-                className="bg-green-700 hover:bg-green-600 font-semibold py-1 rounded text-white text-center tracking-wider uppercase"
-                type="submit"
-              >
-                {formik.values.action} {formik.values.selection}
-              </button>
+            <div className="grid mt-4">
+              {formik.values.action === 'add' ? (
+                <button
+                  className="bg-green-700 hover:bg-green-600 font-semibold py-1 rounded text-white text-center tracking-wider uppercase"
+                  type="submit"
+                >
+                  {formik.values.action} {formik.values.selection}
+                </button>
+              ) : (
+                <></>
+              )}
+              {formik.values.action === 'update' ? (
+                <button
+                  className="bg-yellow-700 hover:bg-yellow-600 font-semibold py-1 rounded text-white text-center tracking-wider uppercase"
+                  type="submit"
+                >
+                  {formik.values.action} {formik.values.selection}
+                </button>
+              ) : (
+                <></>
+              )}
+              {formik.values.action === 'remove' ? (
+                <button
+                  className="bg-red-700 hover:bg-red-600 font-semibold py-1 rounded text-white text-center tracking-wider uppercase"
+                  type="submit"
+                >
+                  {formik.values.action} {formik.values.selection}
+                </button>
+              ) : (
+                <></>
+              )}
             </div>
             {formik.status ? (
               <div className="flex flex-col mt-3 text-center">

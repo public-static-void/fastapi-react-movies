@@ -65,7 +65,7 @@ const ActorSelector = () => {
           ) : (
             <ActorSelectorList name="actorsAvailable" title="Available">
               <select
-                className="border border-solid border-green-500 w-full"
+                className="w-full border border-solid bg-gray-100 border-gray-400 dark:bg-gray-900 dark:border-gray-600"
                 id="actorsAvailable"
                 size={10}
                 defaultValue={availableId ?? undefined}
@@ -79,6 +79,7 @@ const ActorSelector = () => {
               >
                 {actorsAvailable?.map((actor) => (
                   <option
+                    className="text-gray-900 bg-gray-100 hover:bg-gray-300 checked:text-gray-800 checked:bg-gray-200 dark:text-gray-100 dark:bg-gray-900 dark:hover:bg-gray-700 dark:checked:text-gray-200 dark:checked:bg-gray-800"
                     key={actor.id}
                     value={actor.id}
                     data-testid={`actors-available-${actor.id}`}
@@ -92,7 +93,7 @@ const ActorSelector = () => {
           <ActorSelectorList name="actorsSelected" title="Selected">
             {movieId && movie?.actors && movie.actors.length > 0 ? (
               <select
-                className="border border-solid border-green-500 w-full"
+                className="w-full border border-solid bg-gray-100 border-slate-700 dark:bg-gray-900 dark:border-slate-300"
                 id="actorsSelected"
                 size={10}
                 defaultValue={selectedId ?? undefined}
@@ -110,6 +111,7 @@ const ActorSelector = () => {
               >
                 {movie?.actors.map((actor) => (
                   <option
+                    className="text-gray-900 bg-gray-100 hover:bg-gray-300 checked:text-gray-800 checked:bg-gray-200 dark:text-gray-100 dark:bg-gray-900 dark:hover:bg-gray-700 dark:checked:text-gray-200 dark:checked:bg-gray-800"
                     key={actor.id}
                     value={actor.id}
                     data-testid={`actors-selected-${actor.id}`}
@@ -119,7 +121,7 @@ const ActorSelector = () => {
                 ))}
               </select>
             ) : (
-              <div className="border border-solid border-green-500">
+              <div className="border border-solid border-gray-400 dark:border-gray-600">
                 <h3 className="text-center text-lg font-bold">None</h3>
               </div>
             )}

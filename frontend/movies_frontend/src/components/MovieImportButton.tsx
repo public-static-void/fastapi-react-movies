@@ -32,10 +32,10 @@ const MovieImportButton = () => {
     }
   };
   return (
-    <div className="border border-solid border-black p-4 my-4 mx-auto w-max">
+    <div className="p-4 my-4 mx-auto w-max border border-solid rounded-xl border-gray-400 dark:border-gray-600">
       <div className="flex justify-center">
         <button
-          className="bg-blue-500 hover:bg-blue-400 rounded py-2 px-8 text-white text-center text-lg font-semibold"
+          className="inline-block px-8 py-2 text-center text-lg font-semibold rounded-xl text-gray-100 bg-slate-700 hover:bg-slate-600 dark:text-gray-900 dark:bg-slate-300 dark:hover:bg-slate-400"
           type="button"
           onClick={() => {
             void onImportMovies();

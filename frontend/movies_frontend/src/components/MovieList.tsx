@@ -56,7 +56,11 @@ const MovieList = () => {
           data-testid="movies-listbox"
         >
           {movies?.map((movie) => (
-            <option key={movie.id} value={movie.id}>
+            <option
+              key={movie.id}
+              value={movie.id}
+              className="text-gray-900 bg-gray-100 hover:bg-gray-300 checked:text-gray-800 checked:bg-gray-200 dark:text-gray-100 dark:bg-gray-900 dark:hover:bg-gray-700 dark:checked:text-gray-200 dark:checked:bg-gray-800"
+            >
               {movie.filename}
             </option>
           ))}

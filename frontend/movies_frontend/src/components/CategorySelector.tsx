@@ -61,7 +61,7 @@ const CategorySelector = () => {
           <Loading />
         ) : (
           <fieldset disabled={!movieId}>
-            <div className="grid grid-cols-3 gap-1 h-72 overflow-y-scroll">
+            <div className="grid grid-cols-3 gap-1 h-72 overflow-y-scroll text-gray-900 dark:text-gray-100">
               {categories?.map((category) => (
                 <div key={category.id}>
                   <label>
