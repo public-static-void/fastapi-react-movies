@@ -82,12 +82,6 @@ jobs:
           echo "New version is $NEW_VERSION"
           echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
-      - name: Create Release Notes
-        id: create_release_notes
-        uses: johnyherangi/create-release-notes@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
@@ -98,18 +92,27 @@ jobs:
           git tag "v${{ env.VERSION }}"
           git push origin "v${{ env.VERSION }}"
 
+      - name: Create Release Notes
+        id: create_release_notes
+        uses: johnyherangi/create-release-notes@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create Release
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const releaseNotes = process.env.RELEASE_NOTES;
             const response = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag_name: `v${process.env.VERSION}`,
               name: `Release v${process.env.VERSION}`,
-              body: ${{ steps.create_release_notes.outputs.release-notes }},  // Use generated release notes here
+              body: releaseNotes,
               draft: false,
               prerelease: false,
             });
             console.log(response.data);
+        env:
+          RELEASE_NOTES: ${{ steps.create_release_notes.outputs.release-notes }}
