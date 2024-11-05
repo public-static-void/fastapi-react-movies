@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
@@ -38,15 +40,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Check if Yarn is installed
-        id: check_yarn
+      - name: Install Yarn
         run: |
-          if ! command -v yarn &> /dev/null; then
-            echo "Yarn not found, installing..."
-            npm install --global yarn || { echo "Yarn installation failed"; exit 1; }
-          else
-            echo "Yarn is already installed."
-          fi
+          npm install --global yarn || { echo "Yarn installation failed"; exit 1; }
 
       - name: Install frontend dependencies
         run: yarn install --frozen-lockfile
@@ -54,7 +50,6 @@ jobs:
       - name: Bump version and create tag
         id: bump_version
         run: |
-          # Get the current version from backend/pyproject.toml
           BACKEND_VERSION=$(grep '^version =' backend/movies_backend/pyproject.toml | cut -d' ' -f3 | tr -d '"')
           echo "Current Backend Version: $BACKEND_VERSION"
 
@@ -66,7 +61,6 @@ jobs:
           IFS='.' read -r major minor patch <<< "$BACKEND_VERSION"
           NEW_VERSION="$major.$minor.$((patch + 1))"
 
-          # Update files with new version
           sed -i "s/version = \"$BACKEND_VERSION\"/version = \"$NEW_VERSION\"/" backend/movies_backend/pyproject.toml && echo "Updated pyproject.toml"
           sed -i "s/\"version\": \"$BACKEND_VERSION\"/\"version\": \"$NEW_VERSION\"/" frontend/movies_frontend/package.json && echo "Updated package.json"
           sed -i "s/__version__ = \"[0-9]*\.[0-9]*\.[0-9]*\"/__version__ = \"$NEW_VERSION\"/" backend/movies_backend/movies_backend/__init__.py && echo "Updated __init__.py"
@@ -89,11 +83,9 @@ jobs:
         run: |
           TAG_NAME="v${{ env.VERSION }}"
 
-          # Check if the tag exists locally
           if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
             echo "Tag $TAG_NAME already exists locally."
 
-            # Check if the tag exists remotely
             if git ls-remote --tags origin | grep -q "$TAG_NAME"; then
               echo "Tag $TAG_NAME already exists in remote. Skipping creation."
             else
@@ -101,30 +93,12 @@ jobs:
               git push origin "$TAG_NAME"
             fi
           else
-            # Create and push the new tag
             git tag "$TAG_NAME"
             git push origin "$TAG_NAME"
           fi
 
       - name: Draft Release Notes
         id: draft_release_notes
-        uses: release-drafter/release-drafter@v6
+        uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create Release
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const releaseNotes = context.payload.release.draft ? context.payload.release.body : '';
-            const response = await github.rest.repos.createRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              tag_name: `v${process.env.VERSION}`,
-              name: `Release v${process.env.VERSION}`,
-              body: releaseNotes,
-              draft: false,
-              prerelease: false,
-            });
-            console.log(response.data);
