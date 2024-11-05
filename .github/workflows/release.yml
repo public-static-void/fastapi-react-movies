@@ -55,7 +55,16 @@ jobs:
         id: bump_version
         run: |
           # Get the current version from backend/pyproject.toml
-          BACKEND_VERSION=$(grep '^version =' backend/movies_backend/pyproject.toml | cut -d' ' -f3)
+          BACKEND_VERSION=$(grep '^version =' backend/movies_backend/pyproject.toml | cut -d' ' -f3 | tr -d '"')  # Remove quotes
+
+          # Debug output to verify the version
+          echo "Current Backend Version: $BACKEND_VERSION"
+
+          # Check if BACKEND_VERSION is empty
+          if [ -z "$BACKEND_VERSION" ]; then
+            echo "Error: BACKEND_VERSION is empty. Please check your pyproject.toml."
+            exit 1
+          fi
 
           # Increment the patch version (you can modify this logic for major/minor)
           IFS='.' read -r major minor patch <<< "$BACKEND_VERSION"
