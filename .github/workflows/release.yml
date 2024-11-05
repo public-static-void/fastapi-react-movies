@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - "v*" # Trigger on version tags (e.g., v1.0.0)
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -97,8 +99,20 @@ jobs:
             git push origin "$TAG_NAME"
           fi
 
+      # Draft Release Notes using Release Drafter
       - name: Draft Release Notes
         id: draft_release_notes
         uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Create Release using the generated notes from Release Drafter
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ steps.draft_release_notes.outputs.release-notes }}
