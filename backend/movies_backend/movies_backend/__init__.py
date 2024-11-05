@@ -33,7 +33,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="Movie Manager Backend",
         description=description,
-        version="1.0.0",
+        version="1.0.1",
         license_info={
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT",
