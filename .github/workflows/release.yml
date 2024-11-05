@@ -56,36 +56,34 @@ jobs:
         run: |
           # Get the current version from backend/pyproject.toml
           BACKEND_VERSION=$(grep '^version =' backend/movies_backend/pyproject.toml | cut -d' ' -f3 | tr -d '"')
-
-          # Debug output to verify the version
           echo "Current Backend Version: $BACKEND_VERSION"
 
-          # Check if BACKEND_VERSION is empty
           if [ -z "$BACKEND_VERSION" ]; then
             echo "Error: BACKEND_VERSION is empty. Please check your pyproject.toml."
             exit 1
           fi
 
-          # Increment the patch version (you can modify this logic for major/minor)
           IFS='.' read -r major minor patch <<< "$BACKEND_VERSION"
           NEW_VERSION="$major.$minor.$((patch + 1))"
 
-          # Update backend/pyproject.toml
-          sed -i "s/version = \"$BACKEND_VERSION\"/version = \"$NEW_VERSION\"/" backend/movies_backend/pyproject.toml
-
-          # Update frontend/package.json
-          sed -i "s/\"version\": \"$BACKEND_VERSION\"/\"version\": \"$NEW_VERSION\"/" frontend/movies_frontend/package.json
-
-          # Update backend/__init__.py to set the new version
-          sed -i "s/__version__ = \"[0-9]*\.[0-9]*\.[0-9]*\"/__version__ = \"$NEW_VERSION\"/" backend/movies_backend/movies_backend/__init__.py
+          # Update files with new version
+          sed -i "s/version = \"$BACKEND_VERSION\"/version = \"$NEW_VERSION\"/" backend/movies_backend/pyproject.toml && echo "Updated pyproject.toml"
+          sed -i "s/\"version\": \"$BACKEND_VERSION\"/\"version\": \"$NEW_VERSION\"/" frontend/movies_frontend/package.json && echo "Updated package.json"
+          sed -i "s/__version__ = \"[0-9]*\.[0-9]*\.[0-9]*\"/__version__ = \"$NEW_VERSION\"/" backend/movies_backend/movies_backend/__init__.py && echo "Updated __init__.py"
 
           echo "New version is $NEW_VERSION"
           echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
 
-      - name: Configure Git
+      - name: Commit Version Changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+          git add backend/movies_backend/pyproject.toml frontend/movies_frontend/package.json backend/movies_backend/movies_backend/__init__.py
+          git commit -m "Bump version to ${{ env.VERSION }}" || echo "No changes to commit"
+
+      - name: Push Changes
+        run: |
+          git push origin main  # Push changes back to the main branch
 
       - name: Create Git tag
         run: |
@@ -101,6 +99,8 @@ jobs:
         uses: johnyherangi/create-release-notes@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          format: "- [{{subject}}]({{commit_url}}) by @{{author}}"
 
       - name: Create Release
         uses: actions/github-script@v7
