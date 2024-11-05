@@ -87,11 +87,23 @@ jobs:
 
       - name: Create Git tag
         run: |
-          if git rev-parse "v${{ env.VERSION }}" >/dev/null 2>&1; then
-            echo "Tag v${{ env.VERSION }} already exists. Skipping creation."
+          TAG_NAME="v${{ env.VERSION }}"
+
+          # Check if the tag exists locally
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "Tag $TAG_NAME already exists locally."
+
+            # Check if the tag exists remotely
+            if git ls-remote --tags origin | grep -q "$TAG_NAME"; then
+              echo "Tag $TAG_NAME already exists in remote. Skipping creation."
+            else
+              echo "Tag $TAG_NAME exists locally but not in remote. Pushing it."
+              git push origin "$TAG_NAME"
+            fi
           else
-            git tag "v${{ env.VERSION }}"
-            git push origin "v${{ env.VERSION }}"
+            # Create and push the new tag
+            git tag "$TAG_NAME"
+            git push origin "$TAG_NAME"
           fi
 
       - name: Create Release Notes
