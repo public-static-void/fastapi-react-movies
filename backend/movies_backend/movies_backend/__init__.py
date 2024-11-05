@@ -6,10 +6,10 @@ Summary       : FastAPI backend template project.
 
 Author        : Vadim Titov
 Created       : Di Okt 15 16:57:03 2024 +0200
-Last modified : Mi Okt 27 18:24:34 2024 +0200
+Last modified : Di Nov 05 16:02:08 2024 +0100
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -33,7 +33,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title="Movie Manager Backend",
         description=description,
-        version="1.0.1",
+        version=__version__,
         license_info={
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT",

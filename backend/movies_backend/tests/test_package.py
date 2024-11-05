@@ -6,12 +6,12 @@ Summary       : Package tests.
 
 Author        : Vadim Titov
 Created       : Di Okt 15 16:52:09 2024 +0200
-Last modified : Di Nov 05 14:57:02 2024 +0100
+Last modified : Di Nov 05 16:03:52 2024 +0100
 """
 
 from fastapi import FastAPI
 
-from movies_backend import create_app
+from movies_backend import __version__, create_app
 
 
 def test_create_app() -> None:
@@ -19,5 +19,5 @@ def test_create_app() -> None:
     app: FastAPI = create_app()
     assert isinstance(app, FastAPI)
     assert app.title == "Movie Manager Backend"
-    assert app.version == "1.0.1"
+    assert app.version == __version__
     assert "FastAPI backend template project" in app.description
