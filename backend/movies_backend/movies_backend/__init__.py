@@ -9,7 +9,7 @@ Created       : Di Okt 15 16:57:03 2024 +0200
 Last modified : Di Nov 05 16:02:08 2024 +0100
 """
 
-__version__ = "1.0.23"
+__version__ = "1.0.24"
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
