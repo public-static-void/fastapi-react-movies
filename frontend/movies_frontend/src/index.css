@@ -1,11 +1,11 @@
 @import 'tailwindcss';
-@import 'tailwindcss/utilities';
 
-@important #root;
-@core-plugins preflight;
-@custom-variant dark &:is(#root.dark, #root.dark *);
-@content './index.html';
-@content './src/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark, .dark *));
+
+@theme {
+  --dark-mode: 'class';
+  --important: '#root';
+}
 
 @layer base {
   body {
