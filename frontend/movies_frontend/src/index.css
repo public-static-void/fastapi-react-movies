@@ -1,6 +1,12 @@
 @import 'tailwindcss';
 @import 'tailwindcss/utilities';
 
+@important #root;
+@core-plugins preflight;
+@custom-variant dark &:is(#root.dark, #root.dark *);
+@content './index.html';
+@content './src/**/*.{js,ts,jsx,tsx}';
+
 @layer base {
   body {
     @apply bg-slate-200;
