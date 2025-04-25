@@ -14,7 +14,7 @@ const MovieList = () => {
   const movieId = useAppSelector((state) => state.selectBox.movieId);
   const dispatch = useAppDispatch();
   const { data: movies, isLoading } = useMoviesQuery();
-  const { data: movie } = useMovieQuery(movieId ? movieId : skipToken);
+  const { data: movie } = useMovieQuery(movieId ?? skipToken);
 
   useEffect(() => {
     if (movie) {

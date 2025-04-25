@@ -23,7 +23,7 @@ const ActorSelector = () => {
     (state) => state.selectBox
   );
   const { data: actorsAvailable, isLoading } = useActorsQuery();
-  const { data: movie } = useMovieQuery(movieId ? movieId : skipToken);
+  const { data: movie } = useMovieQuery(movieId ?? skipToken);
 
   const onUpdateActor = async (selected: boolean) => {
     if (movieId) {

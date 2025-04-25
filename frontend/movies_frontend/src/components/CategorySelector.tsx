@@ -18,7 +18,7 @@ const CategorySelector = () => {
   const [movieCategoryAddTrigger] = useMovieCategoryAddMutation();
   const [movieCategoryDeleteTrigger] = useMovieCategoryDeleteMutation();
   const { data: categories, isLoading } = useCategoriesQuery();
-  const { data: movie } = useMovieQuery(movieId ? movieId : skipToken);
+  const { data: movie } = useMovieQuery(movieId ?? skipToken);
 
   const onUpdateCategory = async (categoryId: string, selected: boolean) => {
     if (movieId) {
