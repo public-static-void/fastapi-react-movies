@@ -1,4 +1,5 @@
-import { http, HttpResponse, PathParams } from 'msw';
+import type { PathParams } from 'msw';
+import { http, HttpResponse } from 'msw';
 import {
   actors,
   categories,
@@ -7,7 +8,7 @@ import {
   series,
   studios,
 } from './defaults';
-import {
+import type {
   ActorType,
   CategoryType,
   MovieFileType,

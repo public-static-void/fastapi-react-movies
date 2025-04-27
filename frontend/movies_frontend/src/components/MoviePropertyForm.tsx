@@ -1,5 +1,5 @@
 import MoviePropertyFormSelector from './MoviePropertyFormSelector';
-import {
+import type {
   ActorType,
   CategoryType,
   HTTPExceptionType,
@@ -24,9 +24,10 @@ import {
   useStudiosQuery,
   useStudioUpdateMutation,
 } from '../state/MovieManagerApi';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { Field, Formik, FormikHelpers, useFormikContext } from 'formik';
-import { MoviePropertyFormValuesType } from '../types/form';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import type { FormikHelpers } from 'formik';
+import { Field, Formik, useFormikContext } from 'formik';
+import type { MoviePropertyFormValuesType } from '../types/form';
 import { useEffect } from 'react';
 
 const NameSelectorChanged = () => {
@@ -61,7 +62,7 @@ const NameSelectorChanged = () => {
       }
       const selected_names = names.filter((_name) => _id === _name.id);
       if (selected_names.length > 0) {
-        const selected_name = selected_names[0].name;
+        const selected_name = selected_names[0]?.name;
         void setFieldValue('name', selected_name);
       }
     }

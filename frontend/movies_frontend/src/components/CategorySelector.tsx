@@ -6,10 +6,11 @@ import {
   useMovieCategoryDeleteMutation,
   useMovieQuery,
 } from '../state/MovieManagerApi';
-import { FetchBaseQueryError, skipToken } from '@reduxjs/toolkit/query';
+import type { FetchBaseQueryError} from '@reduxjs/toolkit/query';
+import { skipToken } from '@reduxjs/toolkit/query';
 import { Field, useFormikContext } from 'formik';
-import { HTTPExceptionType, MovieType } from '../types/api';
-import { MainPageFormValuesType } from '../types/form';
+import type { HTTPExceptionType, MovieType } from '../types/api';
+import type { MainPageFormValuesType } from '../types/form';
 import { useAppSelector } from '../state/hooks';
 
 const CategorySelector = () => {

@@ -1,7 +1,8 @@
+import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 import MainPage from '../MainPage';
 import user from '@testing-library/user-event';
-import {
+import type {
   HTTPExceptionType,
   MessageType,
   MovieFileType,
@@ -15,9 +16,10 @@ import {
   tgf2Movie,
 } from '../../mocks/defaults';
 import { render, screen, waitFor } from '../../test-utils';
-import { MovieUpdateQueryType } from '../../types/state';
+import type { MovieUpdateQueryType } from '../../types/state';
 import { backend } from '../../mocks/handlers';
-import { http, HttpResponse, PathParams } from 'msw';
+import type { PathParams } from 'msw';
+import { http, HttpResponse } from 'msw';
 import { server } from '../../mocks/server';
 
 describe('Test MainPage', () => {
@@ -359,8 +361,8 @@ describe('Test MovieDataForm', () => {
     const movieListOption = await screen.findByRole('option', {
       name: tgf2Movie.filename,
     });
-    const confirmSpy = jest.spyOn(window, 'confirm');
-    confirmSpy.mockImplementation(jest.fn(() => true));
+    const confirmSpy = vi.spyOn(window, 'confirm');
+    confirmSpy.mockImplementation(vi.fn(() => true));
     await user.click(removeButton);
     expect(window.confirm).toHaveBeenCalled();
     confirmSpy.mockRestore();

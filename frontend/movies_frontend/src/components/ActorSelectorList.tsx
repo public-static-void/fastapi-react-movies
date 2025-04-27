@@ -1,5 +1,5 @@
 import React from 'react';
-import { NameTitleChildrenProps } from '../types/props';
+import type { NameTitleChildrenProps } from '../types/props';
 
 const ActorSelectorList: React.FC<NameTitleChildrenProps> = ({
   children,

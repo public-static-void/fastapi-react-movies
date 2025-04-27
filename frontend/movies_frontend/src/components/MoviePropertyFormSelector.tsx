@@ -1,5 +1,5 @@
 import React from 'react';
-import { TitleChildrenProps } from '../types/props';
+import type { TitleChildrenProps } from '../types/props';
 
 const MoviePropertyFormSelector: React.FC<TitleChildrenProps> = ({
   children,

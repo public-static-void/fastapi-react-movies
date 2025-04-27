@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { HTTPExceptionType, MovieFileType } from '../types/api';
+import type { HTTPExceptionType, MovieFileType } from '../types/api';
 import { useMoviesImportMutation } from '../state/MovieManagerApi';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 const MovieImportButton = () => {
   const [importStatus, setImportStatus] = useState('');

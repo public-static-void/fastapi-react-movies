@@ -1,5 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SelectBoxSliceType } from '../types/state';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import type { SelectBoxSliceType } from '../types/state';
 
 const initialState: SelectBoxSliceType = {
   availableId: null,

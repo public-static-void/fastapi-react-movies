@@ -7,10 +7,10 @@ import {
   useSeriesQuery,
   useStudiosQuery,
 } from '../state/MovieManagerApi';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { Field, useFormikContext } from 'formik';
-import { HTTPExceptionType } from '../types/api';
-import { MainPageFormValuesType } from '../types/form';
+import type { HTTPExceptionType } from '../types/api';
+import type { MainPageFormValuesType } from '../types/form';
 import { reset } from '../state/SelectBoxSlice';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 

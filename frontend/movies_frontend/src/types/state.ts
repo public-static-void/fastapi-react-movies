@@ -1,4 +1,4 @@
-import { MovieUpdateType } from './api';
+import type { MovieUpdateType } from './api';
 
 export interface MovieUpdateQueryType extends MovieUpdateType {
   id: string;

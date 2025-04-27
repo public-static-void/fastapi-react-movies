@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {
+import type {
   ActorType,
   CategoryType,
   MovieFileType,
@@ -7,7 +7,7 @@ import {
   SeriesType,
   StudioType,
 } from '../types/api';
-import {
+import type {
   MovieActorAssociationtype,
   MovieCategoryAssociationtype,
   MoviePropertyType,

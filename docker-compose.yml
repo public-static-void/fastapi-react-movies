@@ -4,9 +4,11 @@ services:
     build:
       context: ./frontend/movies_frontend
       args:
-        VITE_BACKEND: ${VITE_BACKEND}
+        VITE_BACKEND: ${VITE_BACKEND:-http://backend:8000}
     ports:
       - 3000:80
+    restart: unless-stopped
+
   backend:
     build:
       context: ./backend/movies_backend
@@ -16,3 +18,4 @@ services:
       - MM_DB_PATH=/var/db/movies_backend
     volumes:
       - ${MM_DB_PATH:-./backend/db}:/var/db/movies_backend
+    restart: unless-stopped

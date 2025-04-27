@@ -1,5 +1,7 @@
+import { vi } from 'vitest';
 import { Formik } from 'formik';
-import React, { ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import React from 'react';
 import { mainPageFormInitialValues } from '../../state/formik';
 
 interface Props {
@@ -7,7 +9,7 @@ interface Props {
 }
 
 const MockFormikContext: React.FC<Props> = ({ children }) => (
-  <Formik initialValues={mainPageFormInitialValues} onSubmit={jest.fn()}>
+  <Formik initialValues={mainPageFormInitialValues} onSubmit={vi.fn()}>
     {children}
   </Formik>
 );

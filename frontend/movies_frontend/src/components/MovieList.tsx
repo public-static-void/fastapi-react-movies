@@ -1,6 +1,6 @@
 import Loading from './Loading';
 import MovieSection from './MovieSection';
-import { MainPageFormValuesType } from '../types/form';
+import type { MainPageFormValuesType } from '../types/form';
 import { setMovieId } from '../state/SelectBoxSlice';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { useAppDispatch, useAppSelector } from '../state/hooks';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NameTitleChildrenProps } from '../types/props';
+import type { NameTitleChildrenProps } from '../types/props';
 
 const MovieDataFormRow: React.FC<NameTitleChildrenProps> = ({
   children,

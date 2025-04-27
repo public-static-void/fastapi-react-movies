@@ -1,5 +1,5 @@
 import React from 'react';
-import { TitleChildrenProps } from '../types/props';
+import type { TitleChildrenProps } from '../types/props';
 
 const MovieSection: React.FC<TitleChildrenProps> = ({ children, title }) => (
   <section className="p-2 border-2 border-solid rounded-xl border-gray-400 dark:border-gray-600">

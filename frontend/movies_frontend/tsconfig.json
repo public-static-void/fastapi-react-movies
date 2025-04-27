@@ -1,55 +1,24 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
   "compilerOptions": {
-    /* Base Options */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
+    "baseUrl": ".",
     "target": "ESNext",
-    "verbatimModuleSyntax": false,
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    /* Strictness */
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
     "strict": true,
-    "noUncheckedIndexedAccess": true,
-    /* Transpiling Options (If transpiling with TypeScript) */
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "DOM"],
+    "types": ["vite/client", "vitest/globals", "@testing-library/jest-dom"],
+    "noEmit": false,
     "outDir": "dist",
     "sourceMap": true,
-    /* Transpiling Options (If NOT transpiling with TypeScript) */
-    //"moduleResolution": "Bundler",
-    //"module": "ESNext",
-    //"noEmit": true,
-    /* If code will run in the DOM */
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    /* If code will NOT run in the DOM */
-    //"lib": ["ES2023"],
-    /* If building for a library (Only true when transpiling with TypeScript)*/
-    //"declaration": true,
-    /* If building for a library in a monorepo (Only true when transpiling with TypeScript)*/
-    //"composite": true,
-    //"declarationMap": true,
-    /* React */
-    "jsx": "react-jsx",
-    /* Other */
     "forceConsistentCasingInFileNames": true,
-    "types": ["jest", "node", "vite/client"]
+    "resolveJsonModule": true,
+    "noUncheckedIndexedAccess": true,
+    "paths": { "@/*": ["./src/*"] }
   },
-  "exclude": [
-    "node_modules",
-    "**/__tests__/**",
-    "**/__test__/**",
-    "**/__mocks__/**",
-    "**/mocks/**",
-    "**/test-utils/**",
-    "**/test-utils.ts",
-    "**/test-utils.tsx",
-    "**/*.test.ts",
-    "**/*.test.tsx"
-  ]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

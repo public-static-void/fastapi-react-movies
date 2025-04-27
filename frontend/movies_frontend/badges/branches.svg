@@ -1,31 +1,20 @@
-
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="110"
-    height="20"
-  >
-    <linearGradient id="s" x2="0" y2="100%">
-      <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
-      <stop offset="1" stop-opacity=".1"/>
-    </linearGradient>
-    <clipPath id="r">
-      <rect width="110" height="20" rx="3" fill="#fff"/>
-    </clipPath>
-    <g clip-path="url(#r)">
-      <rect width="65" height="20" fill="#555"/>
-      <rect x="65" width="45" height="20" fill="#007ec6"/>
-      <rect width="110" height="20" fill="url(#s)"/>
-    </g>
-    <g fill="#fff" font-family="Tahoma,Arial" font-size="110">
-      <text x="55" y="140" fill="#000" fill-opacity=".3" transform="scale(.1)">
-        Branches
-      </text>
-      <text x="50" y="140" transform="scale(.1)">
-        Branches
-      </text>
-      <text x="700" y="140" transform="scale(.1)">
-        71.15%
-      </text>
-    </g>
-  </svg>
+<svg width="96.2" height="20" viewBox="0 0 962 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="branches: 80%">
+  <title>branches: 80%</title>
+  <linearGradient id="LvOtR" x2="0" y2="100%">
+    <stop offset="0" stop-opacity=".1" stop-color="#EEE"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <mask id="enusU"><rect width="962" height="200" rx="30" fill="#FFF"/></mask>
+  <g mask="url(#enusU)">
+    <rect width="602" height="200" fill="#555"/>
+    <rect width="360" height="200" fill="#a0a127" x="602"/>
+    <rect width="962" height="200" fill="url(#LvOtR)"/>
+  </g>
+  <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
+    <text x="60" y="148" textLength="502" fill="#000" opacity="0.25">branches</text>
+    <text x="50" y="138" textLength="502">branches</text>
+    <text x="657" y="148" textLength="260" fill="#000" opacity="0.25">80%</text>
+    <text x="647" y="138" textLength="260">80%</text>
+  </g>
+  
+</svg>

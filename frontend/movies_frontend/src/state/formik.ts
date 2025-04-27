@@ -1,4 +1,4 @@
-import { MainPageFormValuesType } from '../types/form';
+import type { MainPageFormValuesType } from '../types/form';
 
 export const mainPageFormInitialValues: MainPageFormValuesType = {
   movieName: '',

@@ -7,9 +7,10 @@ import {
   useMovieActorDeleteMutation,
   useMovieQuery,
 } from '../state/MovieManagerApi';
-import { FetchBaseQueryError, skipToken } from '@reduxjs/toolkit/query';
-import { MainPageFormValuesType } from '../types/form';
-import { HTTPExceptionType, MovieType } from '../types/api';
+import type { FetchBaseQueryError} from '@reduxjs/toolkit/query';
+import { skipToken } from '@reduxjs/toolkit/query';
+import type { MainPageFormValuesType } from '../types/form';
+import type { HTTPExceptionType, MovieType } from '../types/api';
 import { setAvailableId, setSelectedId } from '../state/SelectBoxSlice';
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { useFormikContext } from 'formik';

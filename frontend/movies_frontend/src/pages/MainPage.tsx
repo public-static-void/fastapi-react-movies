@@ -2,13 +2,14 @@ import ActorSelector from '../components/ActorSelector';
 import CategorySelector from '../components/CategorySelector';
 import MovieDataForm from '../components/MovieDataForm';
 import MovieList from '../components/MovieList';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { Formik, FormikHelpers } from 'formik';
-import { HTTPExceptionType } from '../types/api';
-import { MainPageFormValuesType } from '../types/form';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import type { FormikHelpers } from 'formik';
+import { Formik } from 'formik';
+import type { HTTPExceptionType } from '../types/api';
+import type { MainPageFormValuesType } from '../types/form';
 import { useAppSelector } from '../state/hooks';
 import { useMovieUpdateMutation } from '../state/MovieManagerApi';
-import { MovieUpdateQueryType } from '../types/state';
+import type { MovieUpdateQueryType } from '../types/state';
 
 const initialValues: MainPageFormValuesType = {
   movieName: '',

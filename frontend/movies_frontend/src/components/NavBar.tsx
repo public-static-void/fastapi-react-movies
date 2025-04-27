@@ -1,5 +1,5 @@
 import NavLink from './NavLink';
-import { RootState } from '../state/store';
+import type { RootState } from '../state/store';
 import { toggleTheme, setTheme } from '../state/ThemeSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
