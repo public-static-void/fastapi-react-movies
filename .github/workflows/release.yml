@@ -42,12 +42,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Yarn
+      - name: Install pnpm
         run: |
-          npm install --global yarn || { echo "Yarn installation failed"; exit 1; }
+          npm install --global pnpm || { echo "pnpm installation failed"; exit 1; }
 
       - name: Install frontend dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Bump version and create tag
         id: bump_version
