@@ -23,6 +23,8 @@ export default defineConfig({
   },
 
   build: {
+    sourcemap: false,
+    chunkSizeWarningLimit: 1500,
     commonjsOptions: {
       include: [/node_modules/],
       transformMixedEsModules: true,
@@ -31,7 +33,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['axios'],
           react: ['react', 'react-dom'],
           router: ['react-router-dom'],
         },
