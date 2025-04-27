@@ -40,7 +40,7 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    include: ['react', 'react-dom', 'lodash', '@testing-library/react'],
+    include: ['react', 'react-dom', '@testing-library/react'],
     esbuildOptions: {
       loader: {
         '.js': 'jsx',

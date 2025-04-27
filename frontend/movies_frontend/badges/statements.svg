@@ -1,14 +1,14 @@
 <svg width="126.1" height="20" viewBox="0 0 1261 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="statements: 59.97%">
   <title>statements: 59.97%</title>
-  <linearGradient id="upWlP" x2="0" y2="100%">
+  <linearGradient id="opWuz" x2="0" y2="100%">
     <stop offset="0" stop-opacity=".1" stop-color="#EEE"/>
     <stop offset="1" stop-opacity=".1"/>
   </linearGradient>
-  <mask id="EQWKl"><rect width="1261" height="200" rx="30" fill="#FFF"/></mask>
-  <g mask="url(#EQWKl)">
+  <mask id="uBOYI"><rect width="1261" height="200" rx="30" fill="#FFF"/></mask>
+  <g mask="url(#uBOYI)">
     <rect width="721" height="200" fill="#555"/>
     <rect width="540" height="200" fill="#ce0000" x="721"/>
-    <rect width="1261" height="200" fill="url(#upWlP)"/>
+    <rect width="1261" height="200" fill="url(#opWuz)"/>
   </g>
   <g aria-hidden="true" fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
     <text x="60" y="148" textLength="621" fill="#000" opacity="0.25">statements</text>
