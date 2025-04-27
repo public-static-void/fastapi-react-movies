@@ -30,6 +30,7 @@ create-license = "^2.1.1"
 pytest-mock = "^3.14.0"
 fastapi = "^0.115.0"
 sqlalchemy = "^2.0.35"
+uvicorn = "^0.30.6"
 
 [build-system]
 requires = ["poetry-core"]
