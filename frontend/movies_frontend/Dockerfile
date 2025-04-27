@@ -23,8 +23,8 @@ COPY . .
 # 5. Build with separate Vite cache and increased timeout
 RUN --mount=type=cache,id=build_cache,target=/app/node_modules/.cache \
   --mount=type=cache,id=vite_cache,target=/app/node_modules/.vite \
-  timeout 600 pnpm build --mode production || \
-  (echo "Build timed out!" && exit 1)
+  NODE_OPTIONS="--max-old-space-size=4096" \
+  pnpm build --mode production
 
 # Stage 2: Production
 FROM nginx:1.25.3-alpine-slim

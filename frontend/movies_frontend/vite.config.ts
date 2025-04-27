@@ -22,7 +22,9 @@ export default defineConfig({
     dedupe: ['react', 'react-dom'],
   },
 
+  cacheDir: './node_modules/.vite',
   build: {
+    emptyOutDir: true,
     sourcemap: false,
     chunkSizeWarningLimit: 1500,
     commonjsOptions: {
@@ -41,11 +43,30 @@ export default defineConfig({
   },
 
   optimizeDeps: {
-    include: ['react', 'react-dom', '@testing-library/react'],
+    include: [
+      'react',
+      'react-dom',
+      '@testing-library/react',
+      'react-router-dom',
+      '@reduxjs/toolkit',
+    ],
+    exclude: ['msw'],
     esbuildOptions: {
       loader: {
         '.js': 'jsx',
       },
+    },
+  },
+
+  esbuild: {
+    jsx: 'automatic',
+    jsxDev: false,
+    jsxImportSource: 'react',
+  },
+
+  server: {
+    watch: {
+      ignored: ['**/mocks/**'],
     },
   },
 
