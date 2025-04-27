@@ -28,6 +28,7 @@ pytest-local-badge = "^1.0.3"
 httpx = "^0.27.2"
 create-license = "^2.1.1"
 pytest-mock = "^3.14.0"
+fastapi = "^0.115.0"
 
 [build-system]
 requires = ["poetry-core"]
