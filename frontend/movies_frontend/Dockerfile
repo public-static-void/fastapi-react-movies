@@ -1,3 +1,4 @@
+# Stage 1: Builder
 FROM node:22.9.0-alpine AS builder
 
 ARG VITE_BACKEND
@@ -5,30 +6,33 @@ ENV VITE_BACKEND=$VITE_BACKEND
 
 WORKDIR /app
 
-# Install pnpm directly (bypass Corepack issues)
-RUN npm install -g pnpm@latest
+# Install pnpm directly with version pinning
+RUN npm install -g pnpm@10.9.0
 
-# Copy ALL configuration files first
+# Copy package management files
 COPY package.json pnpm-lock.yaml ./
-COPY tsconfig.json tsconfig.node.json ./
-COPY vite.config.ts ./
-COPY eslint.config.js ./
 
-# Install dependencies with cache
-RUN --mount=type=cache,target=/root/.pnpm-store \
+# Install dependencies with aggressive caching
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store \
+  --mount=type=cache,target=node_modules/.cache \
   pnpm install --frozen-lockfile --prefer-offline
 
-# Copy application code
-COPY index.html index.html
-COPY src ./src
-COPY public ./public
+# Copy remaining files
+COPY . .
 
-# Build with error resilience
-RUN pnpm build || (echo "Build failed, checking config..." && cat tsconfig.json && exit 1)
+# Build with production optimizations
+RUN pnpm build --mode production
 
-FROM nginx:stable-alpine
+# Stage 2: Optimized Nginx
+FROM nginx:1.25.3-alpine-slim
+
+# Copy built assets
 COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Use custom Nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Remove default Nginx configurations
+RUN rm -rf /etc/nginx/conf.d/default.conf.bak
 
 EXPOSE 80
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
