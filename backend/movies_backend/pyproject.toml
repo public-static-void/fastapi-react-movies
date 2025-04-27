@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "movies-backend"
-version = "1.0.38"
+version = "1.0.39"
 description = ""
 authors = ["Vadim Titov <vadim.titov.hh@gmail.com>"]
 readme = "README.md"
@@ -31,7 +31,7 @@ pytest-mock = "^3.14.0"
 fastapi = "^0.115.0"
 sqlalchemy = "^2.0.35"
 uvicorn = "^0.30.6"
-types-pyyaml = "^6.0.12.20240917"
+types-pyyaml = "^6.0.12.20250402"
 
 [build-system]
 requires = ["poetry-core"]
