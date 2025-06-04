@@ -15,7 +15,8 @@ services:
 
   backend:
     build:
-      context: ./backend/movies_backend
+      context: .
+      dockerfile: backend/movies_backend/Dockerfile
     ports:
       - 8000:8000
     environment:
