@@ -42,6 +42,7 @@ COPY backend/db /var/db/movies_backend
 
 # Set ownership to appuser
 RUN chown -R appuser:appuser /app
+RUN mkdir -p /var/db/movies_backend && chown -R appuser:appuser /var/db/movies_backend
 
 USER appuser
 
