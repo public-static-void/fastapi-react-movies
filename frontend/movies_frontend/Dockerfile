@@ -9,14 +9,14 @@ WORKDIR /app
 # 1. Copy package files separately for better layer caching
 COPY package.json package-lock.json ./
 
-# 2. Install dependencies
-RUN npm ci
+# 2. Install dependencies (only production deps for build)
+RUN npm ci --omit=dev
 
 # 3. Copy remaining files
 COPY . .
 
-# 4. Build
-RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build
+# 4. Build with low memory usage
+RUN NODE_OPTIONS="--max-old-space-size=256" npm run build
 
 # Stage 2: Production
 FROM nginx:1.25.3-alpine-slim
