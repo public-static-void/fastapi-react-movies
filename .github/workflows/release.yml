@@ -42,9 +42,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install frontend dependencies
-        run: npm ci
-
       - name: Bump version and create tag
         id: bump_version
         run: |
