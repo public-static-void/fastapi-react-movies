@@ -1,22 +1,43 @@
-FROM python:3.12.6-alpine
+# Stage 1: Builder
+FROM python:3.12-alpine AS builder
 
-# Essential build dependencies
 RUN apk add --no-cache --virtual .build-deps \
-  build-base libffi-dev openssl-dev postgresql-dev && \
-  apk del .build-deps
+  build-base \
+  libffi-dev \
+  openssl-dev \
+  postgresql-dev
 
 WORKDIR /app
 
-# Install requirements first for caching
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
 COPY requirements.txt .
 RUN --mount=type=cache,target=/root/.cache/pip \
-  pip install --no-cache-dir -r requirements.txt
+  pip install --no-cache-dir -r requirements.txt && \
+  apk del .build-deps
 
-# Copy application code
+# Stage 2: Runtime
+FROM python:3.12-alpine
+
+RUN apk add --no-cache libpq
+
+WORKDIR /app
+
+# Create db directory
+RUN mkdir -p db
+
+# Create appuser
+RUN adduser -D -u 1000 appuser
+
+# Copy venv and app code as root
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 COPY . .
 
-# Security context
-RUN adduser -D appuser && chown -R appuser:appuser /app
+# Set ownership to appuser
+RUN chown -R appuser:appuser /app
+
 USER appuser
 
 EXPOSE 8000
