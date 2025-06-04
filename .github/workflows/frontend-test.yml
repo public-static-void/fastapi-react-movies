@@ -25,16 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Check if pnpm is installed
-        id: check_pnpm
-        run: |
-          if ! command -v pnpm &> /dev/null; then
-            echo "pnpm not found, installing..."
-            npm install -g pnpm
-          else
-            echo "pnpm is already installed."
-          fi
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Run Vitest
-        run: pnpm test
+        run: npm ci
+      - name: Test
+        run: npm test

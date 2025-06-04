@@ -1,1 +1,1 @@
-pnpm test:ci && pnpm build
+npm run test:ci && npm run build

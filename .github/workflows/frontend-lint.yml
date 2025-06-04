@@ -25,18 +25,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Check if pnpm is installed
-        id: check_pnpm
-        run: |
-          if ! command -v pnpm &> /dev/null; then
-            echo "pnpm not found, installing..."
-            npm install -g pnpm
-          else
-            echo "pnpm is already installed."
-          fi
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Run ESLint and Stylelint
-        run: pnpm lint
-      - name: Run Prettier
-        run: pnpm format
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Format
+        run: npm run format

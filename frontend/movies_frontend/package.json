@@ -9,18 +9,17 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "pnpm exec eslint . --fix && pnpm exec stylelint '**/*.(css|scss|tsx)' --fix",
-    "format": "pnpm exec prettier --write .",
-    "test": "pnpm exec vitest --passWithNoTests",
-    "test:ci": "pnpm exec vitest run --passWithNoTests",
-    "test:coverage": "pnpm exec vitest run --coverage",
+    "lint": "eslint . --fix && stylelint '**/*.(css|scss|tsx)' --fix",
+    "format": "prettier --write .",
+    "test": "vitest --passWithNoTests",
+    "test:ci": "vitest run --passWithNoTests",
+    "test:coverage": "vitest run --coverage",
     "badges:statements": "coverage-badges --jsonPath total.statements.pct --label statements --output ./badges/statements.svg",
     "badges:branches": "coverage-badges --jsonPath total.branches.pct --label branches --output ./badges/branches.svg",
     "badges:functions": "coverage-badges --jsonPath total.functions.pct --label functions --output ./badges/functions.svg",
     "badges:lines": "coverage-badges --jsonPath total.lines.pct --label lines --output ./badges/lines.svg",
-    "test:badges": "pnpm test:coverage && pnpm badges:statements && pnpm badges:branches && pnpm badges:functions && pnpm badges:lines",
-    "typecheck": "pnpm exec tsc --noEmit",
-    "preinstall": "npx only-allow pnpm"
+    "test:badges": "npm run test:coverage && npm run badges:statements && npm run badges:branches && npm run badges:functions && npm run badges:lines",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.7.0",
@@ -76,13 +75,13 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "pnpm exec eslint --fix"
+      "eslint --fix"
     ],
     "*.{jsx,tsx,css,scss}": [
-      "pnpm exec stylelint --fix"
+      "stylelint --fix"
     ],
     "*.{js,jsx,ts,tsx,css,scss}": [
-      "pnpm exec prettier --write"
+      "prettier --write"
     ]
   },
   "config": {
