@@ -4,7 +4,6 @@
   "version": "1.0.46",
   "type": "module",
   "scripts": {
-    "prepare": "husky",
     "commit": "cz",
     "dev": "vite",
     "build": "vite build",
