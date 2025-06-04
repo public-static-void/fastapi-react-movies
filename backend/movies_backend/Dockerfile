@@ -27,6 +27,10 @@ WORKDIR /app
 # Create db directory
 RUN mkdir -p db
 
+# Copy the entire db folder into the container
+RUN mkdir -p /var/db/movies_backend
+COPY ../db /var/db/movies_backend
+
 # Create appuser
 RUN adduser -D -u 1000 appuser
 
