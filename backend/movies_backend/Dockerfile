@@ -12,7 +12,7 @@ WORKDIR /app
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY requirements.txt .
+COPY backend/movies_backend/requirements.txt .
 RUN --mount=type=cache,target=/root/.cache/pip \
   pip install --no-cache-dir -r requirements.txt && \
   apk del .build-deps
