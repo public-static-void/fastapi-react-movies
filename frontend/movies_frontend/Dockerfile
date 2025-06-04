@@ -16,7 +16,8 @@ RUN npm ci
 COPY . .
 
 # 4. Build with low memory usage
-RUN NODE_OPTIONS="--max-old-space-size=256" npm run build
+ENV NODE_ENV=production
+RUN NODE_OPTIONS="--max-old-space-size=448" npm run build
 
 # Stage 2: Production
 FROM nginx:1.25.3-alpine-slim

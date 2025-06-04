@@ -4,18 +4,22 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import checker from 'vite-plugin-checker';
 
+const isCI = process.env.CI === 'true' || process.env.NODE_ENV === 'production';
+
 export default defineConfig({
   plugins: [
-    react({}),
+    react(),
     tailwindcss(),
-    checker({
-      typescript: true,
-      eslint: {
-        lintCommand: 'eslint "./src/**/*.{ts,tsx}"',
-        useFlatConfig: true,
-      },
-    }),
-  ],
+    // Only enable checker in dev/CI, not in Docker production build
+    !isCI &&
+      checker({
+        typescript: true,
+        eslint: {
+          lintCommand: 'eslint "./src/**/*.{ts,tsx}"',
+          useFlatConfig: true,
+        },
+      }),
+  ].filter(Boolean),
 
   resolve: {
     alias: { '@': '/src' },
@@ -32,29 +36,21 @@ export default defineConfig({
       transformMixedEsModules: true,
     },
     cssCodeSplit: true,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          react: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-        },
-      },
-    },
+    // rollupOptions: {
+    //   output: {
+    //     manualChunks: {
+    //       react: ['react', 'react-dom'],
+    //       router: ['react-router-dom'],
+    //     },
+    //   },
+    // },
   },
 
   optimizeDeps: {
-    include: [
-      'react',
-      'react-dom',
-      '@testing-library/react',
-      'react-router-dom',
-      '@reduxjs/toolkit',
-    ],
+    include: ['react', 'react-dom', 'react-router-dom'],
     exclude: ['msw'],
     esbuildOptions: {
-      loader: {
-        '.js': 'jsx',
-      },
+      loader: { '.js': 'jsx' },
     },
   },
 
