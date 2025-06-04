@@ -27,6 +27,7 @@ FROM python:3.12-alpine
 RUN apk add --no-cache libpq
 
 WORKDIR /app
+RUN mkdir -p db && chown appuser:appuser db
 
 # Copy virtual environment
 COPY --from=builder /opt/venv /opt/venv
