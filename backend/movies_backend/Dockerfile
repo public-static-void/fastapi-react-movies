@@ -3,7 +3,6 @@ FROM python:3.12.6-alpine
 # Essential build dependencies
 RUN apk add --no-cache --virtual .build-deps \
   build-base libffi-dev openssl-dev postgresql-dev && \
-  pip install -r requirements.txt && \
   apk del .build-deps
 
 WORKDIR /app
