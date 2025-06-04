@@ -23,23 +23,28 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Stage 2: Runtime
 FROM python:3.12-alpine
 
-# Runtime dependencies
+# Install runtime dependencies
 RUN apk add --no-cache libpq
 
 WORKDIR /app
-RUN mkdir -p db && chown appuser:appuser db
 
-# Copy virtual environment
+# Create the db directory as root
+RUN mkdir -p db
+
+# Create unprivileged user
+RUN adduser -D -u 1000 appuser
+
+# Copy virtual environment from builder
 COPY --from=builder /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Copy application code
-COPY --chown=nobody:nobody . .
+# Copy application code as root
+COPY . .
 
-# Create unprivileged user
-RUN adduser -D -u 1000 appuser && \
-  chown -R appuser:appuser /app
+# Set ownership of all files to appuser
+RUN chown -R appuser:appuser /app
 
+# Switch to non-root user
 USER appuser
 
 EXPOSE 8000
