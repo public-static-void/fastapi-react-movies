@@ -41,9 +41,5 @@ RUN adduser -D -u 1000 appuser && \
 
 USER appuser
 
-ENV MM_DB_PATH=/tmp/db \
-  PYTHONUNBUFFERED=1 \
-  PYTHONHASHSEED=random
-
 EXPOSE 8000
 CMD ["python", "-m", "movies_backend.main"]

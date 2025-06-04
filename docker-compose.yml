@@ -7,8 +7,8 @@ services:
         VITE_BACKEND: ${VITE_BACKEND:-http://backend:8000}
     ports:
       - 3000:80
-    mem_limit: 256m
-    mem_reservation: 128m
+    mem_limit: 512m
+    mem_reservation: 256m
     restart: unless-stopped
     depends_on:
       - backend
@@ -22,6 +22,6 @@ services:
       - MM_DB_PATH=/var/db/movies_backend
     volumes:
       - ${MM_DB_PATH:-./backend/db}:/var/db/movies_backend
-    mem_limit: 256m
-    mem_reservation: 128m
+    mem_limit: 512m
+    mem_reservation: 256m
     restart: unless-stopped
