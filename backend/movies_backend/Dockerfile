@@ -37,7 +37,8 @@ RUN adduser -D -u 1000 appuser
 # Copy venv and app code as root
 COPY --from=builder /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-COPY . .
+COPY backend/movies_backend /app/movies_backend
+COPY backend/db /var/db/movies_backend
 
 # Set ownership to appuser
 RUN chown -R appuser:appuser /app
