@@ -21,8 +21,6 @@ services:
       - 8000:8000
     environment:
       - MM_DB_PATH=/var/db/movies_backend
-    volumes:
-      - ${MM_DB_PATH:-./backend/db}:/var/db/movies_backend
     mem_limit: 512m
     mem_reservation: 256m
     restart: unless-stopped
