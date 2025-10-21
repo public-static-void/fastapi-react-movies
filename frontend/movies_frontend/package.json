@@ -1,7 +1,7 @@
 {
   "name": "movies_frontend",
   "private": true,
-  "version": "1.0.66",
+  "version": "1.0.67",
   "type": "module",
   "scripts": {
     "commit": "cz",
