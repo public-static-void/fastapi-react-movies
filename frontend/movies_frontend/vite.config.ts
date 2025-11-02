@@ -82,7 +82,7 @@ export default defineConfig({
     ],
     include: ['**/*.{test,spec}.{js,ts,jsx,tsx}'],
     globals: true,
-    environment: 'happy-dom',
+    environment: 'jsdom',
     setupFiles: './vitest.setup.ts',
     typecheck: {
       include: ['**/*.test.ts', '**/*.test.tsx'],
