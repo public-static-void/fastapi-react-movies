@@ -21,21 +21,23 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.7.0",
-    "@types/react-dom": "^19.1.2",
+    "@reduxjs/toolkit": "^2.9.2",
+    "@types/react-dom": "^19.2.2",
     "@types/react-redux": "^7.1.34",
-    "@vitejs/plugin-react": "^4.4.1",
+    "@vitejs/plugin-react": "^5.1.0",
     "formik": "^2.4.6",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-redux": "^9.2.0",
-    "react-router-dom": "^7.5.2",
-    "tailwindcss": "^4.1.4",
-    "typescript": "^5.8.3"
+    "react-router-dom": "^7.9.5",
+    "tailwindcss": "^4.1.16",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@adso-ts/badges": "^1.1.4",
     "@eslint/js": "^9.39.0",
+    "@ryansonshine/commitizen": "^4.2.8",
+    "@ryansonshine/cz-conventional-changelog": "^3.3.4",
     "@tailwindcss/postcss": "^4.1.16",
     "@tailwindcss/vite": "^4.1.16",
     "@testing-library/dom": "^10.4.1",
@@ -46,9 +48,7 @@
     "@types/react": "^19.2.2",
     "@vitest/coverage-v8": "4.0.6",
     "autoprefixer": "^10.4.21",
-    "commitizen": "^4.3.1",
     "coverage-badges-cli": "^2.2.0",
-    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.39.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
@@ -85,7 +85,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "./node_modules/@ryansonshine/cz-conventional-changelog"
     }
   }
 }
