@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "movies-backend"
-version = "1.0.69"
+version = "1.0.70"
 description = ""
 authors = ["Vadim Titov <vadim.titov.hh@gmail.com>"]
 readme = "README.md"
