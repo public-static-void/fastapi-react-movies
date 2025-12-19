@@ -16,7 +16,7 @@ decli==0.6.3 ; python_version >= "3.12" and python_version < "4.0"
 dill==0.4.0 ; python_version >= "3.12" and python_version < "4.0"
 distlib==0.4.0 ; python_version >= "3.12" and python_version < "4.0"
 fastapi==0.120.4 ; python_version >= "3.12" and python_version < "4.0"
-filelock==3.20.0 ; python_version >= "3.12" and python_version < "4.0"
+filelock==3.20.1 ; python_version >= "3.12" and python_version < "4.0"
 flake8==7.3.0 ; python_version >= "3.12" and python_version < "4.0"
 greenlet==3.2.4 ; python_version >= "3.12" and python_version < "4.0" and (platform_machine == "aarch64" or platform_machine == "ppc64le" or platform_machine == "x86_64" or platform_machine == "amd64" or platform_machine == "AMD64" or platform_machine == "win32" or platform_machine == "WIN32")
 h11==0.16.0 ; python_version >= "3.12" and python_version < "4.0"
