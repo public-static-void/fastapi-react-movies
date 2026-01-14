@@ -91,13 +91,6 @@ jobs:
         run: |
           echo "Running tests for version ${{ env.VERSION }}"
 
-      - name: Build applications
-        run: |
-          cd backend/movies_backend
-          python -m build
-          cd ../../frontend/movies_frontend
-          npm run build
-
       - name: Deploy to production
         run: |
           echo "Deploying version ${{ env.VERSION }} to production"
