@@ -46,7 +46,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^25.0.8",
     "@types/react": "^19.2.8",
-    "@vitest/coverage-v8": "4.0.17",
+    "@vitest/coverage-v8": "^4.0.17",
     "autoprefixer": "^10.4.23",
     "coverage-badges-cli": "^2.2.0",
     "eslint": "^9.39.2",
@@ -69,9 +69,6 @@
     "vite": "^7.3.1",
     "vite-plugin-checker": "^0.12.0",
     "vitest": "^4.0.17"
-  },
-  "resolutions": {
-    "esbuild": "0.19.2"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
