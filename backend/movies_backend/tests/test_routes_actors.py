@@ -9,7 +9,6 @@ Created       : Mi Okt 29 14:42:33 2024 +0200
 Last modified : Mi Okt 29 15:02:33 2024 +0200
 """
 
-
 from fastapi.testclient import TestClient
 
 from movies_backend.main import app

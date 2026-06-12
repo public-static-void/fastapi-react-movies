@@ -8,6 +8,7 @@ Author        : Vadim Titov
 Created       : Mo Sep 23 16:56:42 2024 +0200
 Last modified : Mo Okt 14 19:44:51 2024 +0200
 """
+
 import os
 import re
 from enum import Enum
