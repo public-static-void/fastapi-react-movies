@@ -6,7 +6,7 @@ import {
   useMovieCategoryDeleteMutation,
   useMovieQuery,
 } from '../state/MovieManagerApi';
-import type { FetchBaseQueryError} from '@reduxjs/toolkit/query';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { Field, useFormikContext } from 'formik';
 import type { HTTPExceptionType, MovieType } from '../types/api';
