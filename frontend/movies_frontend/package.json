@@ -1,7 +1,7 @@
 {
   "name": "movies_frontend",
   "private": true,
-  "version": "1.0.85",
+  "version": "1.0.87",
   "type": "module",
   "scripts": {
     "commit": "cz",
@@ -46,7 +46,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/node": "^25.0.8",
     "@types/react": "^19.2.8",
-    "@vitest/coverage-v8": "^4.0.17",
+"@vitest/coverage-v8": "4.1.8",
     "autoprefixer": "^10.4.23",
     "coverage-badges-cli": "^2.2.0",
     "eslint": "^9.39.2",
@@ -68,7 +68,7 @@
     "typescript-eslint": "^8.53.0",
     "vite": "^7.3.1",
     "vite-plugin-checker": "^0.12.0",
-    "vitest": "^4.0.17"
+    "vitest": "^4.1.8"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
