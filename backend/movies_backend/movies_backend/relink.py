@@ -11,7 +11,6 @@ Created       : Mo Okt 14 19:17:21 2024 +0200
 Last modified : Di Okt 15 18:35:47 2024 +0200
 """
 
-
 from movies_backend.database import get_db_session, init_db
 
 from .config import get_logger, setup_logging

@@ -9,7 +9,6 @@ Created       : Mo Sep 23 14:40:23 2024 +0200
 Last modified : Di Okt 15 18:25:26 2024 +0200
 """
 
-
 import uvicorn
 
 from . import create_app
