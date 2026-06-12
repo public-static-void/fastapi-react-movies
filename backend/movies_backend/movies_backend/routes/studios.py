@@ -16,12 +16,20 @@ from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
 from ..config import get_logger
-from ..crud import (add_studio, delete_studio, get_all_studios, get_studio,
-                    update_studio)
+from ..crud import (
+    add_studio,
+    delete_studio,
+    get_all_studios,
+    get_studio,
+    update_studio,
+)
 from ..database import get_db_session
-from ..exceptions import (DuplicateEntryException,
-                          IntegrityConstraintException, InvalidIDException,
-                          PathException)
+from ..exceptions import (
+    DuplicateEntryException,
+    IntegrityConstraintException,
+    InvalidIDException,
+    PathException,
+)
 from ..models import Studio
 from ..schemas import HTTPExceptionSchema, MoviePropertySchema, StudioSchema
 from ..util import rename_movie_file
@@ -93,7 +101,7 @@ def studios_add(
         logger.warning(repr(e))
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail={"message": (repr(e))},
+            detail={"message": repr(e)},
         ) from e
     return studio
 

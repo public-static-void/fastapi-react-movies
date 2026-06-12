@@ -11,8 +11,12 @@ Last modified : Di Okt 28 17:33:48 2024 +0200
 
 import pytest
 
-from movies_backend.config import (DEFAULT_DB_PATH, get_db_path,
-                                   get_log_config, get_sqlite_path)
+from movies_backend.config import (
+    DEFAULT_DB_PATH,
+    get_db_path,
+    get_log_config,
+    get_sqlite_path,
+)
 
 
 def test_default_db_path():

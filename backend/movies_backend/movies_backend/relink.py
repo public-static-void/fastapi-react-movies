@@ -17,8 +17,12 @@ from movies_backend.database import get_db_session, init_db
 from .config import get_logger, setup_logging
 from .crud import get_all_movies
 from .models import Actor, Category
-from .util import (update_actor_link, update_category_link, update_series_link,
-                   update_studio_link)
+from .util import (
+    update_actor_link,
+    update_category_link,
+    update_series_link,
+    update_studio_link,
+)
 
 
 def relink_property_files() -> None:

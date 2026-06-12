@@ -16,15 +16,27 @@ from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
 from ..config import get_logger
-from ..crud import (add_series, delete_series, get_all_series, get_series,
-                    update_series)
+from ..crud import (
+    add_series,
+    delete_series,
+    get_all_series,
+    get_series,
+    update_series,
+)
 from ..database import get_db_session
-from ..exceptions import (DuplicateEntryException,
-                          IntegrityConstraintException, InvalidIDException,
-                          PathException)
+from ..exceptions import (
+    DuplicateEntryException,
+    IntegrityConstraintException,
+    InvalidIDException,
+    PathException,
+)
 from ..models import Series
-from ..schemas import (HTTPExceptionSchema, MessageSchema, MoviePropertySchema,
-                       SeriesSchema)
+from ..schemas import (
+    HTTPExceptionSchema,
+    MessageSchema,
+    MoviePropertySchema,
+    SeriesSchema,
+)
 from ..util import rename_movie_file
 
 logger = get_logger()
@@ -94,7 +106,7 @@ def series_add(
         logger.warning(repr(e))
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail={"message": (repr(e))},
+            detail={"message": repr(e)},
         ) from e
     return series
 
