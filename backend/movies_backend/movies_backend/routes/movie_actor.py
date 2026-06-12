@@ -16,8 +16,11 @@ from sqlalchemy.orm import Session
 from ..config import get_logger
 from ..crud import add_movie_actor, delete_movie_actor
 from ..database import get_db_session
-from ..exceptions import (DuplicateEntryException, InvalidIDException,
-                          PathException)
+from ..exceptions import (
+    DuplicateEntryException,
+    InvalidIDException,
+    PathException,
+)
 from ..models import Movie
 from ..schemas import HTTPExceptionSchema, MovieSchema
 

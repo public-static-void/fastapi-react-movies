@@ -14,13 +14,23 @@ from typing import List, Optional, Tuple
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from .exceptions import (DuplicateEntryException, IntegrityConstraintException,
-                         InvalidIDException)
+from .exceptions import (
+    DuplicateEntryException,
+    IntegrityConstraintException,
+    InvalidIDException,
+)
 from .models import Actor, Category, Movie, Series, Studio
 from .schemas import MovieUpdateSchema
-from .util import (generate_sort_name, parse_filename, remove_movie,
-                   rename_movie_file, update_actor_link, update_category_link,
-                   update_series_link, update_studio_link)
+from .util import (
+    generate_sort_name,
+    parse_filename,
+    remove_movie,
+    rename_movie_file,
+    update_actor_link,
+    update_category_link,
+    update_series_link,
+    update_studio_link,
+)
 
 
 def add_actor(

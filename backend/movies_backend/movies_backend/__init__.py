@@ -14,8 +14,16 @@ __version__ = "1.0.87"
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routes import (actors, categories, movie_actor, movie_category, movies,
-                     root, series, studios)
+from .routes import (
+    actors,
+    categories,
+    movie_actor,
+    movie_category,
+    movies,
+    root,
+    series,
+    studios,
+)
 
 
 def create_app() -> FastAPI:

@@ -16,8 +16,11 @@ from sqlalchemy.orm import Session
 from ..config import get_logger
 from ..crud import add_movie_category, delete_movie_category
 from ..database import get_db_session
-from ..exceptions import (DuplicateEntryException, InvalidIDException,
-                          PathException)
+from ..exceptions import (
+    DuplicateEntryException,
+    InvalidIDException,
+    PathException,
+)
 from ..models import Movie
 from ..schemas import HTTPExceptionSchema, MovieSchema
 
@@ -77,19 +80,19 @@ def movie_category_add(
         logger.warning(repr(e))
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail={"message": (repr(e))},
+            detail={"message": repr(e)},
         ) from e
     except InvalidIDException as e:
         logger.warning(repr(e))
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail={"message": (repr(e))},
+            detail={"message": repr(e)},
         ) from e
     except PathException as e:
         logger.error(repr(e))
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail={"message": (repr(e))},
+            detail={"message": repr(e)},
         ) from e
     return movie
 

@@ -18,21 +18,42 @@ from pytest import FixtureRequest, TempPathFactory
 from pytest_mock import MockerFixture
 from sqlalchemy.orm import Session
 
-from movies_backend.crud import (add_actor, add_category, add_movie,
-                                 add_series, add_studio, delete_actor,
-                                 delete_category, delete_series, delete_studio,
-                                 get_actor, get_actor_by_name, get_all_actors,
-                                 get_all_categories, get_all_movies,
-                                 get_all_series, get_all_studios, get_category,
-                                 get_category_by_name, get_movie, get_series,
-                                 get_series_by_name, get_studio,
-                                 get_studio_by_name, parse_file_info,
-                                 update_actor, update_category, update_series,
-                                 update_studio)
+from movies_backend.crud import (
+    add_actor,
+    add_category,
+    add_movie,
+    add_series,
+    add_studio,
+    delete_actor,
+    delete_category,
+    delete_series,
+    delete_studio,
+    get_actor,
+    get_actor_by_name,
+    get_all_actors,
+    get_all_categories,
+    get_all_movies,
+    get_all_series,
+    get_all_studios,
+    get_category,
+    get_category_by_name,
+    get_movie,
+    get_series,
+    get_series_by_name,
+    get_studio,
+    get_studio_by_name,
+    parse_file_info,
+    update_actor,
+    update_category,
+    update_series,
+    update_studio,
+)
 from movies_backend.database import get_db_session, init_db
-from movies_backend.exceptions import (DuplicateEntryException,
-                                       IntegrityConstraintException,
-                                       InvalidIDException)
+from movies_backend.exceptions import (
+    DuplicateEntryException,
+    IntegrityConstraintException,
+    InvalidIDException,
+)
 
 
 @pytest.fixture(scope="module", autouse=True)

@@ -7,7 +7,7 @@ import {
   useMovieActorDeleteMutation,
   useMovieQuery,
 } from '../state/MovieManagerApi';
-import type { FetchBaseQueryError} from '@reduxjs/toolkit/query';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { skipToken } from '@reduxjs/toolkit/query';
 import type { MainPageFormValuesType } from '../types/form';
 import type { HTTPExceptionType, MovieType } from '../types/api';

@@ -16,15 +16,27 @@ from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
 from ..config import get_logger
-from ..crud import (add_category, delete_category, get_all_categories,
-                    get_category, update_category)
+from ..crud import (
+    add_category,
+    delete_category,
+    get_all_categories,
+    get_category,
+    update_category,
+)
 from ..database import get_db_session
-from ..exceptions import (DuplicateEntryException,
-                          IntegrityConstraintException, InvalidIDException,
-                          PathException)
+from ..exceptions import (
+    DuplicateEntryException,
+    IntegrityConstraintException,
+    InvalidIDException,
+    PathException,
+)
 from ..models import Category, Movie
-from ..schemas import (CategorySchema, HTTPExceptionSchema, MessageSchema,
-                       MoviePropertySchema)
+from ..schemas import (
+    CategorySchema,
+    HTTPExceptionSchema,
+    MessageSchema,
+    MoviePropertySchema,
+)
 from ..util import update_category_link
 
 logger = get_logger()
@@ -96,7 +108,7 @@ def categories_add(
         logger.warning(repr(e))
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail={"message": (repr(e))},
+            detail={"message": repr(e)},
         ) from e
     return category
 
@@ -174,13 +186,13 @@ def categories_update(
         logger.warning(repr(e))
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail={"message": (repr(e))},
+            detail={"message": repr(e)},
         ) from e
     except InvalidIDException as e:
         logger.warning(repr(e))
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail={"message": (repr(e))},
+            detail={"message": repr(e)},
         ) from e
     except PathException as e:
         logger.error(repr(e))
@@ -232,12 +244,12 @@ def categories_delete(
         logger.warning(repr(e))
         raise HTTPException(
             status_code=status.HTTP_412_PRECONDITION_FAILED,
-            detail={"message": (repr(e))},
+            detail={"message": repr(e)},
         ) from e
     except InvalidIDException as e:
         logger.warning(repr(e))
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail={"message": (repr(e))},
+            detail={"message": repr(e)},
         ) from e
     return {"message": f"Category {category_id} deleted"}

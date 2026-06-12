@@ -16,15 +16,27 @@ from fastapi.exceptions import HTTPException
 from sqlalchemy.orm import Session
 
 from ..config import get_logger
-from ..crud import (add_actor, delete_actor, get_actor, get_all_actors,
-                    update_actor)
+from ..crud import (
+    add_actor,
+    delete_actor,
+    get_actor,
+    get_all_actors,
+    update_actor,
+)
 from ..database import get_db_session
-from ..exceptions import (DuplicateEntryException,
-                          IntegrityConstraintException, InvalidIDException,
-                          PathException)
+from ..exceptions import (
+    DuplicateEntryException,
+    IntegrityConstraintException,
+    InvalidIDException,
+    PathException,
+)
 from ..models import Actor
-from ..schemas import (ActorSchema, HTTPExceptionSchema, MessageSchema,
-                       MoviePropertySchema)
+from ..schemas import (
+    ActorSchema,
+    HTTPExceptionSchema,
+    MessageSchema,
+    MoviePropertySchema,
+)
 from ..util import rename_movie_file
 
 logger = get_logger()

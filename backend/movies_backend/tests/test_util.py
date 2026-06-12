@@ -15,8 +15,12 @@ from pytest_mock import MockerFixture
 from movies_backend.config import get_db_path
 from movies_backend.exceptions import ListFilesException
 from movies_backend.models import Actor, Movie, Series, Studio
-from movies_backend.util import (PathType, generate_movie_filename,
-                                 get_movie_path, list_files)
+from movies_backend.util import (
+    PathType,
+    generate_movie_filename,
+    get_movie_path,
+    list_files,
+)
 
 
 def test_generate_movie_filename(mocker: MockerFixture) -> None:

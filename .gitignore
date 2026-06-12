@@ -214,3 +214,6 @@ sketch
 
 coverage/
 .python-version
+
+# Knowledge Documents — runtime artifacts, never committed
+knowledge/
