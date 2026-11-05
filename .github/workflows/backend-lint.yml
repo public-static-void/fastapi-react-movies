@@ -37,3 +37,9 @@ jobs:
       - name: Run Mypy
         run: |
           mypy .
+      - name: Export-diff guard (requirements-dev.txt vs poetry.lock)
+        run: |
+          python -m pip install --quiet poetry poetry-plugin-export
+          tmp_export="$(mktemp)"
+          poetry export -f requirements.txt --output "$tmp_export" --with dev
+          diff requirements-dev.txt "$tmp_export"
