@@ -8,11 +8,13 @@ toolchain exactly pinned, and keep Dependabot scoped to manifest paths.
 
 import re
 import subprocess
+import tomllib
 from pathlib import Path
 
 import yaml
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+LOCK_FILE = REPO_ROOT / "backend" / "movies_backend" / "poetry.lock"
 WORKFLOWS_DIR = REPO_ROOT / ".github" / "workflows"
 DEPENDABOT_CONFIG = REPO_ROOT / ".github" / "dependabot.yml"
 DOCKERFILE = REPO_ROOT / "backend" / "movies_backend" / "Dockerfile"
@@ -31,6 +33,17 @@ EXPORT_GUARD_REMNANT = re.compile(
 )
 POETRY_INSTALL_LINE = re.compile(r"pip install.*poetry")
 HASHLESS_FLAG = re.compile(r"--without-hashes|--generate-hashes")
+
+# Minimum versions the lock must reach after the CVE catch-up bump;
+# pylint floors here so a resolver run cannot silently revert the
+# lint-toolchain upgrades that landed earlier.
+CATCH_UP_FLOORS = {
+    "anyio": (4, 14, 2),
+    "certifi": (2026, 10, 19),
+    "filelock": (4, 2, 1),
+    "virtualenv": (21, 14, 13),
+    "pylint": (4, 1, 3),
+}
 
 
 def tracked_files():
@@ -240,3 +253,26 @@ def test_ci_config_files_parse_as_yaml():
         )
         if path.parent == WORKFLOWS_DIR:
             assert "jobs" in document, f"{path.name}: no jobs mapping"
+
+
+def locked_versions():
+    """Map every package name in the lock to its pinned version."""
+    with LOCK_FILE.open("rb") as handle:
+        lock = tomllib.load(handle)
+    return {pkg["name"]: pkg["version"] for pkg in lock["package"]}
+
+
+def version_key(version):
+    """Numeric release key so '2026.10.19' sorts below '2026.10.20'."""
+    return tuple(int(part) for part in re.findall(r"\d+", version))
+
+
+def test_lock_meets_cve_catch_up_floors():
+    """The lock pins every catch-up package at or above its floor."""
+    locked = locked_versions()
+    for name, floor in CATCH_UP_FLOORS.items():
+        floor_str = ".".join(str(part) for part in floor)
+        assert name in locked, f"{name} missing from poetry.lock"
+        assert version_key(locked[name]) >= floor, (
+            f"{name} pinned at {locked[name]}, below required {floor_str}"
+        )
