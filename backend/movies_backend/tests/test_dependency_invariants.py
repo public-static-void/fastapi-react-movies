@@ -67,6 +67,8 @@ def dependabot_entries():
     current = None
     for line in content.splitlines():
         stripped = line.strip()
+        if stripped.startswith("- "):
+            stripped = stripped[2:].strip()
         if stripped.startswith("package-ecosystem:"):
             value = stripped.split(":", 1)[1].strip().strip('"')
             current = {
