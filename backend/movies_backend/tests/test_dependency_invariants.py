@@ -10,6 +10,8 @@ import re
 import subprocess
 from pathlib import Path
 
+import yaml
+
 REPO_ROOT = Path(__file__).resolve().parents[3]
 WORKFLOWS_DIR = REPO_ROOT / ".github" / "workflows"
 DEPENDABOT_CONFIG = REPO_ROOT / ".github" / "dependabot.yml"
@@ -224,3 +226,17 @@ def test_dependabot_config_avoids_forbidden_keys():
         assert forbidden not in content, (
             f"dependabot.yml must not contain {forbidden!r}"
         )
+
+
+def test_ci_config_files_parse_as_yaml():
+    """Workflows and the Dependabot config are valid YAML mappings."""
+    paths = sorted(WORKFLOWS_DIR.glob("*.yml"))
+    paths.append(DEPENDABOT_CONFIG)
+    assert paths, "no CI config files found"
+    for path in paths:
+        document = yaml.safe_load(path.read_text(encoding="utf-8"))
+        assert isinstance(document, dict), (
+            f"{path.name}: top level is not a mapping"
+        )
+        if path.parent == WORKFLOWS_DIR:
+            assert "jobs" in document, f"{path.name}: no jobs mapping"
