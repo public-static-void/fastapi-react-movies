@@ -9,19 +9,12 @@ RUN apk add --no-cache --virtual .build-deps \
 
 WORKDIR /app
 
-# Toolchain installs to system python, deliberately before the venv
-# exists: the venv is what ships to the runtime stage, so poetry must
-# not end up inside it.
-RUN pip install --no-cache-dir poetry==2.2.1 poetry-plugin-export==1.10.1
-
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-COPY backend/movies_backend/pyproject.toml backend/movies_backend/poetry.lock backend/movies_backend/README.md ./
-RUN poetry check --lock
-RUN tmp="$(mktemp)" && \
-  poetry export -f requirements.txt --output "$tmp" --only main && \
-  pip install --no-cache-dir -r "$tmp" && \
+COPY backend/movies_backend/requirements.txt .
+RUN --mount=type=cache,target=/root/.cache/pip \
+  pip install --no-cache-dir -r requirements.txt && \
   apk del .build-deps
 
 # Stage 2: Runtime
